@@ -8,24 +8,10 @@ def ToCamelCase(type):
 def generate_header():
     print('package safecast\n')
     print("""
-type Float interface {
+type numericType interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+	~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 |
 	~float32 | ~float64
-}
-
-type Integer interface {
-	Signed | Unsigned
-}
-
-type Signed interface {
-	~int | ~int8 | ~int16 | ~int32 | ~int64
-}
-
-type Unsigned interface {
-	~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64
-}
-
-type Number interface {
-	Integer | Float
 }"""
           )
 
@@ -34,7 +20,7 @@ def generate_to_function():
     """Generate int conversion functions."""
 
     print("""
-func To[T Number, F Number](value F)(to T, ok bool) {
+func To[T numericType, F numericType](value F)(to T, ok bool) {
     ok = true
     switch t := any(to).(type) {""")
     for to_type in ('int', 'uint'):
@@ -59,7 +45,8 @@ func To[T Number, F Number](value F)(to T, ok bool) {
 
 def generate_to_type(to_type, to_bits):
     full_to_type = f'{to_type}{to_bits}'
-    print(f'func to{ToCamelCase(to_type)}{to_bits}[F Number](value F) ({full_to_type}, bool) {{')
+    print(
+        f'func to{ToCamelCase(to_type)}{to_bits}[F numericType](value F) ({full_to_type}, bool) {{')
     print(f'\tswitch f := any(value).(type) {{')
     for from_type in ('int', 'uint'):
         for from_bits in ALL_INT_BITS:
@@ -78,7 +65,7 @@ def generate_call(full_from_type, full_to_type):
         print(f'\tcase {full_from_type}: return f, true')
     else:
         print(
-            f'\tcase {full_from_type}: return {ToCamelCase(full_from_type)}To{ToCamelCase(full_to_type)}(f)')
+            f'\tcase {full_from_type}: return {full_from_type}To{ToCamelCase(full_to_type)}(f)')
 
 
 def main():

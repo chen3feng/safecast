@@ -87,7 +87,7 @@ def generate(from_type, from_bits, to_type, to_bits):
         else:  # int to uint
             int_to_uint()
 
-    func_name = f'{ToCamelCase(full_from_type)}To{ToCamelCase(full_to_type)}'
+    func_name = f'{full_from_type}To{ToCamelCase(full_to_type)}'
     print(f'// {func_name} converts the {full_from_type} value to {full_to_type} safely.')
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
 
@@ -116,11 +116,11 @@ def generate_float_convs():
                 generate_to_float_conv(int_type, int_bits, float_bit)
 
     print("""
-    func Float32ToFloat64(value float32) (float64, bool) {
+    func float32ToFloat64(value float32) (float64, bool) {
         return float64(value), true
     }
 
-    func Float64ToFloat32(value float64) (float32, bool) {
+    func float64ToFloat32(value float64) (float32, bool) {
         if value > math.MaxFloat32 || value < -math.MaxFloat32 {
             return float32(value), false
         }
@@ -142,7 +142,7 @@ def generate_float_to_conv(from_bits, to_type, to_bits):
         cond += f' || value > {full_from_type}(math.Max{ToCamelCase(full_to_type)})'
         print_false_return(cond)
 
-    func_name = f'Float{from_bits}To{ToCamelCase(to_type)}{to_bits}'
+    func_name = f'float{from_bits}To{ToCamelCase(to_type)}{to_bits}'
     print(f'// {func_name} converts the {full_from_type} value to {full_to_type} safely.')
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
     generate_range_chack()
@@ -153,7 +153,7 @@ def generate_float_to_conv(from_bits, to_type, to_bits):
 def generate_to_float_conv(from_type, from_bits, to_bits):
     full_from_type = f'{from_type}{from_bits}'
     full_to_type = f'float{to_bits}'
-    print(f'func {ToCamelCase(full_from_type)}To{ToCamelCase(full_to_type)}(value {full_from_type}) ({full_to_type}, bool) {{')
+    print(f'func {full_from_type}To{ToCamelCase(full_to_type)}(value {full_from_type}) ({full_to_type}, bool) {{')
     print(f'\treturn {full_to_type}(value), true')
     print('}')
 
