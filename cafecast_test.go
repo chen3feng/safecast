@@ -1,8 +1,11 @@
 package safecast_test
 
 import (
-	"github.com/chen3feng/safecast"
+	"fmt"
+	"math"
 	"testing"
+
+	"github.com/chen3feng/safecast"
 )
 
 func TestTo(t *testing.T) {
@@ -10,4 +13,39 @@ func TestTo(t *testing.T) {
 	if ok {
 		t.Fail()
 	}
+}
+
+func ExampleTo_intNoOverflow() {
+	b, ok := safecast.To[byte](255)
+	fmt.Print(b, ok)
+	// Output:
+	// 255 true
+}
+
+func ExampleTo_intOverflow() {
+	b, ok := safecast.To[byte](256)
+	fmt.Print(b, ok)
+	// Output:
+	// 0 false
+}
+
+func ExampleTo_ValueInRange() {
+	n, ok := safecast.To[uint](1)
+	fmt.Print(n, ok)
+	// Output:
+	// 1 true
+}
+
+func ExampleTo_valueOutOfRange() {
+	n, ok := safecast.To[uint32](-1)
+	fmt.Print(n, ok)
+	// Output:
+	// 4294967295 false
+}
+
+func ExampleTo_floatOverflow() {
+	n, ok := safecast.To[float32](math.MaxFloat32 * 2)
+	fmt.Print(n, ok)
+	// Output:
+	// +Inf false
 }
