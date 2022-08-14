@@ -1,26 +1,12 @@
 package safecast
 
-type Float interface {
-	~float32 | ~float64
+type numericType interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+		~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 |
+		~float32 | ~float64
 }
 
-type Integer interface {
-	Signed | Unsigned
-}
-
-type Signed interface {
-	~int | ~int8 | ~int16 | ~int32 | ~int64
-}
-
-type Unsigned interface {
-	~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64
-}
-
-type Number interface {
-	Integer | Float
-}
-
-func To[T Number, F Number](value F) (to T, ok bool) {
+func To[T numericType, F numericType](value F) (to T, ok bool) {
 	ok = true
 	switch t := any(to).(type) {
 	case int:
@@ -63,360 +49,360 @@ func To[T Number, F Number](value F) (to T, ok bool) {
 	return to, ok
 }
 
-func toInt[F Number](value F) (int, bool) {
+func toInt[F numericType](value F) (int, bool) {
 	switch f := any(value).(type) {
 	case int:
 		return f, true
 	case int8:
-		return Int8ToInt(f)
+		return int8ToInt(f)
 	case int16:
-		return Int16ToInt(f)
+		return int16ToInt(f)
 	case int32:
-		return Int32ToInt(f)
+		return int32ToInt(f)
 	case int64:
-		return Int64ToInt(f)
+		return int64ToInt(f)
 	case uint:
-		return UintToInt(f)
+		return uintToInt(f)
 	case uint8:
-		return Uint8ToInt(f)
+		return uint8ToInt(f)
 	case uint16:
-		return Uint16ToInt(f)
+		return uint16ToInt(f)
 	case uint32:
-		return Uint32ToInt(f)
+		return uint32ToInt(f)
 	case uint64:
-		return Uint64ToInt(f)
+		return uint64ToInt(f)
 	case float32:
-		return Float32ToInt(f)
+		return float32ToInt(f)
 	case float64:
-		return Float64ToInt(f)
+		return float64ToInt(f)
 	}
 	return int(value), false
 }
 
-func toInt8[F Number](value F) (int8, bool) {
+func toInt8[F numericType](value F) (int8, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToInt8(f)
+		return intToInt8(f)
 	case int8:
 		return f, true
 	case int16:
-		return Int16ToInt8(f)
+		return int16ToInt8(f)
 	case int32:
-		return Int32ToInt8(f)
+		return int32ToInt8(f)
 	case int64:
-		return Int64ToInt8(f)
+		return int64ToInt8(f)
 	case uint:
-		return UintToInt8(f)
+		return uintToInt8(f)
 	case uint8:
-		return Uint8ToInt8(f)
+		return uint8ToInt8(f)
 	case uint16:
-		return Uint16ToInt8(f)
+		return uint16ToInt8(f)
 	case uint32:
-		return Uint32ToInt8(f)
+		return uint32ToInt8(f)
 	case uint64:
-		return Uint64ToInt8(f)
+		return uint64ToInt8(f)
 	case float32:
-		return Float32ToInt8(f)
+		return float32ToInt8(f)
 	case float64:
-		return Float64ToInt8(f)
+		return float64ToInt8(f)
 	}
 	return int8(value), false
 }
 
-func toInt16[F Number](value F) (int16, bool) {
+func toInt16[F numericType](value F) (int16, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToInt16(f)
+		return intToInt16(f)
 	case int8:
-		return Int8ToInt16(f)
+		return int8ToInt16(f)
 	case int16:
 		return f, true
 	case int32:
-		return Int32ToInt16(f)
+		return int32ToInt16(f)
 	case int64:
-		return Int64ToInt16(f)
+		return int64ToInt16(f)
 	case uint:
-		return UintToInt16(f)
+		return uintToInt16(f)
 	case uint8:
-		return Uint8ToInt16(f)
+		return uint8ToInt16(f)
 	case uint16:
-		return Uint16ToInt16(f)
+		return uint16ToInt16(f)
 	case uint32:
-		return Uint32ToInt16(f)
+		return uint32ToInt16(f)
 	case uint64:
-		return Uint64ToInt16(f)
+		return uint64ToInt16(f)
 	case float32:
-		return Float32ToInt16(f)
+		return float32ToInt16(f)
 	case float64:
-		return Float64ToInt16(f)
+		return float64ToInt16(f)
 	}
 	return int16(value), false
 }
 
-func toInt32[F Number](value F) (int32, bool) {
+func toInt32[F numericType](value F) (int32, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToInt32(f)
+		return intToInt32(f)
 	case int8:
-		return Int8ToInt32(f)
+		return int8ToInt32(f)
 	case int16:
-		return Int16ToInt32(f)
+		return int16ToInt32(f)
 	case int32:
 		return f, true
 	case int64:
-		return Int64ToInt32(f)
+		return int64ToInt32(f)
 	case uint:
-		return UintToInt32(f)
+		return uintToInt32(f)
 	case uint8:
-		return Uint8ToInt32(f)
+		return uint8ToInt32(f)
 	case uint16:
-		return Uint16ToInt32(f)
+		return uint16ToInt32(f)
 	case uint32:
-		return Uint32ToInt32(f)
+		return uint32ToInt32(f)
 	case uint64:
-		return Uint64ToInt32(f)
+		return uint64ToInt32(f)
 	case float32:
-		return Float32ToInt32(f)
+		return float32ToInt32(f)
 	case float64:
-		return Float64ToInt32(f)
+		return float64ToInt32(f)
 	}
 	return int32(value), false
 }
 
-func toInt64[F Number](value F) (int64, bool) {
+func toInt64[F numericType](value F) (int64, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToInt64(f)
+		return intToInt64(f)
 	case int8:
-		return Int8ToInt64(f)
+		return int8ToInt64(f)
 	case int16:
-		return Int16ToInt64(f)
+		return int16ToInt64(f)
 	case int32:
-		return Int32ToInt64(f)
+		return int32ToInt64(f)
 	case int64:
 		return f, true
 	case uint:
-		return UintToInt64(f)
+		return uintToInt64(f)
 	case uint8:
-		return Uint8ToInt64(f)
+		return uint8ToInt64(f)
 	case uint16:
-		return Uint16ToInt64(f)
+		return uint16ToInt64(f)
 	case uint32:
-		return Uint32ToInt64(f)
+		return uint32ToInt64(f)
 	case uint64:
-		return Uint64ToInt64(f)
+		return uint64ToInt64(f)
 	case float32:
-		return Float32ToInt64(f)
+		return float32ToInt64(f)
 	case float64:
-		return Float64ToInt64(f)
+		return float64ToInt64(f)
 	}
 	return int64(value), false
 }
 
-func toUint[F Number](value F) (uint, bool) {
+func toUint[F numericType](value F) (uint, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToUint(f)
+		return intToUint(f)
 	case int8:
-		return Int8ToUint(f)
+		return int8ToUint(f)
 	case int16:
-		return Int16ToUint(f)
+		return int16ToUint(f)
 	case int32:
-		return Int32ToUint(f)
+		return int32ToUint(f)
 	case int64:
-		return Int64ToUint(f)
+		return int64ToUint(f)
 	case uint:
 		return f, true
 	case uint8:
-		return Uint8ToUint(f)
+		return uint8ToUint(f)
 	case uint16:
-		return Uint16ToUint(f)
+		return uint16ToUint(f)
 	case uint32:
-		return Uint32ToUint(f)
+		return uint32ToUint(f)
 	case uint64:
-		return Uint64ToUint(f)
+		return uint64ToUint(f)
 	case float32:
-		return Float32ToUint(f)
+		return float32ToUint(f)
 	case float64:
-		return Float64ToUint(f)
+		return float64ToUint(f)
 	}
 	return uint(value), false
 }
 
-func toUint8[F Number](value F) (uint8, bool) {
+func toUint8[F numericType](value F) (uint8, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToUint8(f)
+		return intToUint8(f)
 	case int8:
-		return Int8ToUint8(f)
+		return int8ToUint8(f)
 	case int16:
-		return Int16ToUint8(f)
+		return int16ToUint8(f)
 	case int32:
-		return Int32ToUint8(f)
+		return int32ToUint8(f)
 	case int64:
-		return Int64ToUint8(f)
+		return int64ToUint8(f)
 	case uint:
-		return UintToUint8(f)
+		return uintToUint8(f)
 	case uint8:
 		return f, true
 	case uint16:
-		return Uint16ToUint8(f)
+		return uint16ToUint8(f)
 	case uint32:
-		return Uint32ToUint8(f)
+		return uint32ToUint8(f)
 	case uint64:
-		return Uint64ToUint8(f)
+		return uint64ToUint8(f)
 	case float32:
-		return Float32ToUint8(f)
+		return float32ToUint8(f)
 	case float64:
-		return Float64ToUint8(f)
+		return float64ToUint8(f)
 	}
 	return uint8(value), false
 }
 
-func toUint16[F Number](value F) (uint16, bool) {
+func toUint16[F numericType](value F) (uint16, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToUint16(f)
+		return intToUint16(f)
 	case int8:
-		return Int8ToUint16(f)
+		return int8ToUint16(f)
 	case int16:
-		return Int16ToUint16(f)
+		return int16ToUint16(f)
 	case int32:
-		return Int32ToUint16(f)
+		return int32ToUint16(f)
 	case int64:
-		return Int64ToUint16(f)
+		return int64ToUint16(f)
 	case uint:
-		return UintToUint16(f)
+		return uintToUint16(f)
 	case uint8:
-		return Uint8ToUint16(f)
+		return uint8ToUint16(f)
 	case uint16:
 		return f, true
 	case uint32:
-		return Uint32ToUint16(f)
+		return uint32ToUint16(f)
 	case uint64:
-		return Uint64ToUint16(f)
+		return uint64ToUint16(f)
 	case float32:
-		return Float32ToUint16(f)
+		return float32ToUint16(f)
 	case float64:
-		return Float64ToUint16(f)
+		return float64ToUint16(f)
 	}
 	return uint16(value), false
 }
 
-func toUint32[F Number](value F) (uint32, bool) {
+func toUint32[F numericType](value F) (uint32, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToUint32(f)
+		return intToUint32(f)
 	case int8:
-		return Int8ToUint32(f)
+		return int8ToUint32(f)
 	case int16:
-		return Int16ToUint32(f)
+		return int16ToUint32(f)
 	case int32:
-		return Int32ToUint32(f)
+		return int32ToUint32(f)
 	case int64:
-		return Int64ToUint32(f)
+		return int64ToUint32(f)
 	case uint:
-		return UintToUint32(f)
+		return uintToUint32(f)
 	case uint8:
-		return Uint8ToUint32(f)
+		return uint8ToUint32(f)
 	case uint16:
-		return Uint16ToUint32(f)
+		return uint16ToUint32(f)
 	case uint32:
 		return f, true
 	case uint64:
-		return Uint64ToUint32(f)
+		return uint64ToUint32(f)
 	case float32:
-		return Float32ToUint32(f)
+		return float32ToUint32(f)
 	case float64:
-		return Float64ToUint32(f)
+		return float64ToUint32(f)
 	}
 	return uint32(value), false
 }
 
-func toUint64[F Number](value F) (uint64, bool) {
+func toUint64[F numericType](value F) (uint64, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToUint64(f)
+		return intToUint64(f)
 	case int8:
-		return Int8ToUint64(f)
+		return int8ToUint64(f)
 	case int16:
-		return Int16ToUint64(f)
+		return int16ToUint64(f)
 	case int32:
-		return Int32ToUint64(f)
+		return int32ToUint64(f)
 	case int64:
-		return Int64ToUint64(f)
+		return int64ToUint64(f)
 	case uint:
-		return UintToUint64(f)
+		return uintToUint64(f)
 	case uint8:
-		return Uint8ToUint64(f)
+		return uint8ToUint64(f)
 	case uint16:
-		return Uint16ToUint64(f)
+		return uint16ToUint64(f)
 	case uint32:
-		return Uint32ToUint64(f)
+		return uint32ToUint64(f)
 	case uint64:
 		return f, true
 	case float32:
-		return Float32ToUint64(f)
+		return float32ToUint64(f)
 	case float64:
-		return Float64ToUint64(f)
+		return float64ToUint64(f)
 	}
 	return uint64(value), false
 }
 
-func toFloat32[F Number](value F) (float32, bool) {
+func toFloat32[F numericType](value F) (float32, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToFloat32(f)
+		return intToFloat32(f)
 	case int8:
-		return Int8ToFloat32(f)
+		return int8ToFloat32(f)
 	case int16:
-		return Int16ToFloat32(f)
+		return int16ToFloat32(f)
 	case int32:
-		return Int32ToFloat32(f)
+		return int32ToFloat32(f)
 	case int64:
-		return Int64ToFloat32(f)
+		return int64ToFloat32(f)
 	case uint:
-		return UintToFloat32(f)
+		return uintToFloat32(f)
 	case uint8:
-		return Uint8ToFloat32(f)
+		return uint8ToFloat32(f)
 	case uint16:
-		return Uint16ToFloat32(f)
+		return uint16ToFloat32(f)
 	case uint32:
-		return Uint32ToFloat32(f)
+		return uint32ToFloat32(f)
 	case uint64:
-		return Uint64ToFloat32(f)
+		return uint64ToFloat32(f)
 	case float32:
 		return f, true
 	case float64:
-		return Float64ToFloat32(f)
+		return float64ToFloat32(f)
 	}
 	return float32(value), false
 }
 
-func toFloat64[F Number](value F) (float64, bool) {
+func toFloat64[F numericType](value F) (float64, bool) {
 	switch f := any(value).(type) {
 	case int:
-		return IntToFloat64(f)
+		return intToFloat64(f)
 	case int8:
-		return Int8ToFloat64(f)
+		return int8ToFloat64(f)
 	case int16:
-		return Int16ToFloat64(f)
+		return int16ToFloat64(f)
 	case int32:
-		return Int32ToFloat64(f)
+		return int32ToFloat64(f)
 	case int64:
-		return Int64ToFloat64(f)
+		return int64ToFloat64(f)
 	case uint:
-		return UintToFloat64(f)
+		return uintToFloat64(f)
 	case uint8:
-		return Uint8ToFloat64(f)
+		return uint8ToFloat64(f)
 	case uint16:
-		return Uint16ToFloat64(f)
+		return uint16ToFloat64(f)
 	case uint32:
-		return Uint32ToFloat64(f)
+		return uint32ToFloat64(f)
 	case uint64:
-		return Uint64ToFloat64(f)
+		return uint64ToFloat64(f)
 	case float32:
-		return Float32ToFloat64(f)
+		return float32ToFloat64(f)
 	case float64:
 		return f, true
 	}
