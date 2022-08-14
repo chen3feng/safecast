@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
-
-ALL_INT_BITS = ('', '8', '16', '32', '64')
-
-
-def ToCamelCase(type):
-    return type[0].upper() + type[1:]
+from safecast import ALL_INT_BITS, to_camel_case
 
 
 def generate_header():
@@ -46,7 +41,7 @@ def generate(from_type, from_bits, to_type, to_bits):
             if int(from_bits) > int(to_bits):
                 print_false_return(overflow)
             else:
-                cond = f'value > math.Max{ToCamelCase(full_to_type)}'
+                cond = f'value > math.Max{to_camel_case(full_to_type)}'
                 print_false_return(cond)
         elif from_bits:  # uintnn to int
             if int(from_bits) < 32:
@@ -87,7 +82,7 @@ def generate(from_type, from_bits, to_type, to_bits):
         else:  # int to uint
             int_to_uint()
 
-    func_name = f'{ToCamelCase(full_from_type)}To{ToCamelCase(full_to_type)}'
+    func_name = f'{full_from_type}To{to_camel_case(full_to_type)}'
     print(f'// {func_name} converts the {full_from_type} value to {full_to_type} safely.')
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
 
@@ -116,11 +111,11 @@ def generate_float_convs():
                 generate_to_float_conv(int_type, int_bits, float_bit)
 
     print("""
-    func Float32ToFloat64(value float32) (float64, bool) {
+    func float32ToFloat64(value float32) (float64, bool) {
         return float64(value), true
     }
 
-    func Float64ToFloat32(value float64) (float32, bool) {
+    func float64ToFloat32(value float64) (float32, bool) {
         if value > math.MaxFloat32 || value < -math.MaxFloat32 {
             return float32(value), false
         }
@@ -137,12 +132,12 @@ def generate_float_to_conv(from_bits, to_type, to_bits):
         print(f'\tif {cond} {{\n\t\treturn {full_to_type}(value), false\n\t}}')
 
     def generate_range_chack():
-        min = f'{full_from_type}(math.Min{ToCamelCase(full_to_type)})' if to_type == 'int' else '0'
+        min = f'{full_from_type}(math.Min{to_camel_case(full_to_type)})' if to_type == 'int' else '0'
         cond = f'value < {min}'
-        cond += f' || value > {full_from_type}(math.Max{ToCamelCase(full_to_type)})'
+        cond += f' || value > {full_from_type}(math.Max{to_camel_case(full_to_type)})'
         print_false_return(cond)
 
-    func_name = f'Float{from_bits}To{ToCamelCase(to_type)}{to_bits}'
+    func_name = f'float{from_bits}To{to_camel_case(to_type)}{to_bits}'
     print(f'// {func_name} converts the {full_from_type} value to {full_to_type} safely.')
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
     generate_range_chack()
@@ -153,7 +148,8 @@ def generate_float_to_conv(from_bits, to_type, to_bits):
 def generate_to_float_conv(from_type, from_bits, to_bits):
     full_from_type = f'{from_type}{from_bits}'
     full_to_type = f'float{to_bits}'
-    print(f'func {ToCamelCase(full_from_type)}To{ToCamelCase(full_to_type)}(value {full_from_type}) ({full_to_type}, bool) {{')
+
+    print(f'func {full_from_type}To{to_camel_case(full_to_type)}(value {full_from_type}) ({full_to_type}, bool) {{')
     print(f'\treturn {full_to_type}(value), true')
     print('}')
 
