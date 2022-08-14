@@ -4,9 +4,9 @@
 
 [![License Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-red.svg)](COPYING)
 [![Python](https://img.shields.io/badge/Language-go1.18+-blue.svg)](https://www.python.org/)
-![Build Status](https://github.com/chen3feng/stl4go/actions/workflows/go.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/chen3feng/stl4go/badge.svg?branch=master)](https://coveralls.io/github/chen3feng/stl4go?branch=master)
-[![GoReport](https://goreportcard.com/badge/github.com/securego/gosec)](https://goreportcard.com/report/github.com/chen3feng/stl4go)
+![Build Status](https://github.com/chen3feng/safecast/actions/workflows/go.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/chen3feng/safecast/badge.svg?branch=master)](https://coveralls.io/github/chen3feng/safecast?branch=master)
+[![GoReport](https://goreportcard.com/badge/github.com/securego/gosec)](https://goreportcard.com/report/github.com/chen3feng/safecast)
 
 安全的数值类型转换库。支持除了 `uintptr` 外的所有整数和浮点数类型。
 

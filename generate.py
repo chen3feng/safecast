@@ -148,7 +148,6 @@ def generate_float_to_conv(from_bits, to_type, to_bits):
 def generate_to_float_conv(from_type, from_bits, to_bits):
     full_from_type = f'{from_type}{from_bits}'
     full_to_type = f'float{to_bits}'
-
     print(f'func {full_from_type}To{to_camel_case(full_to_type)}(value {full_from_type}) ({full_to_type}, bool) {{')
     print(f'\treturn {full_to_type}(value), true')
     print('}')
