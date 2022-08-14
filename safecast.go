@@ -6,3 +6,4 @@ package safecast
 
 //go:generate sh -c "python3 generate.py | gofmt > casts.go"
 //go:generate sh -c "python3 generate_generic.py | gofmt > generics.go"
+//go:generate sh -c "python3 generate_test.py | gofmt > safecast_test.go"
