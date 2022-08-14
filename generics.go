@@ -6,47 +6,50 @@ type numericType interface {
 		~float32 | ~float64
 }
 
-func To[T numericType, F numericType](value F) (to T, ok bool) {
+// To converts a numeric value from the FromType to the specified ToType type safely.
+// result will always be same as the usual type cast (type(value)),
+// but ok is false when overflow or underflow occured.
+func To[ToType numericType, FromType numericType](value FromType) (result ToType, ok bool) {
 	ok = true
-	switch t := any(to).(type) {
+	switch t := any(result).(type) {
 	case int:
 		t, ok = toInt(value)
-		to = T(t)
+		result = ToType(t)
 	case int8:
 		t, ok = toInt8(value)
-		to = T(t)
+		result = ToType(t)
 	case int16:
 		t, ok = toInt16(value)
-		to = T(t)
+		result = ToType(t)
 	case int32:
 		t, ok = toInt32(value)
-		to = T(t)
+		result = ToType(t)
 	case int64:
 		t, ok = toInt64(value)
-		to = T(t)
+		result = ToType(t)
 	case uint:
 		t, ok = toUint(value)
-		to = T(t)
+		result = ToType(t)
 	case uint8:
 		t, ok = toUint8(value)
-		to = T(t)
+		result = ToType(t)
 	case uint16:
 		t, ok = toUint16(value)
-		to = T(t)
+		result = ToType(t)
 	case uint32:
 		t, ok = toUint32(value)
-		to = T(t)
+		result = ToType(t)
 	case uint64:
 		t, ok = toUint64(value)
-		to = T(t)
+		result = ToType(t)
 	case float32:
 		t, ok = toFloat32(value)
-		to = T(t)
+		result = ToType(t)
 	case float64:
 		t, ok = toFloat64(value)
-		to = T(t)
+		result = ToType(t)
 	}
-	return to, ok
+	return result, ok
 }
 
 func toInt[F numericType](value F) (int, bool) {

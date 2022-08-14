@@ -29,7 +29,7 @@ func ExampleTo_intOverflow() {
 	// 0 false
 }
 
-func ExampleTo_ValueInRange() {
+func ExampleTo_valueInRange() {
 	n, ok := safecast.To[uint](1)
 	fmt.Print(n, ok)
 	// Output:
