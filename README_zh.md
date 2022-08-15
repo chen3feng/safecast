@@ -1,4 +1,4 @@
-# safecast
+# safecast -- Safe Numeric Type Cast Library For Go
 
 [English](README.md) | 简体中文
 
