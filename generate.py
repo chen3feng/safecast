@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-from safecast import ALL_INT_BITS, to_camel_case
+from safecast import ALL_INT_BITS, ALL_FIXED_INT_BITS, to_camel_case
 
 
 def generate_header():
     print('package safecast\n')
     print('import "math"\n')
+    print('const intBits = 32 << (^uint(0) >> 63)\n')
 
 
-def generate(from_type, from_bits, to_type, to_bits):
+def generate_fixed_int(from_type, from_bits, to_type, to_bits):
     full_from_type = f'{from_type}{from_bits}'
     full_to_type = f'{to_type}{to_bits}'
 
@@ -46,11 +47,11 @@ def generate(from_type, from_bits, to_type, to_bits):
         elif from_bits:  # uintnn to int
             if int(from_bits) < 32:
                 return
-            print_false_return(f'value > math.MaxInt{from_bits}')
+            print_false_return('value > math.MaxInt')
         elif to_bits:  # uint_to_intnn
             if int(to_bits) > 32:
                 return
-            print_false_return(f'value > math.MaxInt{from_bits}')
+            print_false_return(f'value > math.MaxInt{to_bits}')
         else:  # uint to int
             print_false_return('value > math.MaxInt')
 
@@ -82,11 +83,22 @@ def generate(from_type, from_bits, to_type, to_bits):
         else:  # int to uint
             int_to_uint()
 
+    print_function_header(full_from_type, full_to_type)
+    generate_range_chack()
+    print_function_footer(full_to_type)
+
+
+def print_range_check(cond, full_to_type):
+    print(f'\tif {cond} {{\n\t\treturn {full_to_type}(value), false\n\t}}')
+
+
+def print_function_header(full_from_type, full_to_type):
     func_name = f'{full_from_type}To{to_camel_case(full_to_type)}'
     print(f'// {func_name} converts the {full_from_type} value to {full_to_type} safely.')
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
 
-    generate_range_chack()
+
+def print_function_footer(full_to_type):
     print(f'\treturn {full_to_type}(value), true')
     print('}\n')
 
@@ -94,12 +106,55 @@ def generate(from_type, from_bits, to_type, to_bits):
 def generate_int_convs():
     """Generate int conversion functions."""
     for from_type in ('int', 'uint'):
-        for from_bit in ALL_INT_BITS:
+        for from_bits in ALL_FIXED_INT_BITS:
             for to_type in ('int', 'uint'):
-                for to_bits in ALL_INT_BITS:
-                    if from_type == to_type and from_bit == to_bits:
-                        continue
-                    generate(from_type, from_bit, to_type, to_bits)
+                for to_bits in ALL_FIXED_INT_BITS:
+                    generate_fixed_int(from_type, from_bits, to_type, to_bits)
+    for from_type in ('int', 'uint'):
+        for from_bits in ALL_FIXED_INT_BITS:
+            for to_type in ('int', 'uint'):
+                generate_fixed_int_to_int(from_type, from_bits, to_type)
+    for from_type in ('int', 'uint'):
+        for to_type in ('int', 'uint'):
+            for to_bit in ALL_FIXED_INT_BITS:
+                generate_int_to_fixed_int(from_type, to_type, to_bit)
+
+    print_function_header('int', 'uint')
+    print('''    return uint(value), value >= 0''')
+    print('}')
+
+    print_function_header('uint', 'int')
+    print('''    return int(value), value <= math.MaxInt''')
+    print('}')
+
+
+def generate_fixed_int_to_int(from_type, from_bits, to_type):
+    full_from_type = f'{from_type}{from_bits}'
+    print_function_header(full_from_type, to_type)
+    print(f'''\
+        if intBits == 32 {{
+            var r {to_type}32
+            r, ok = {full_from_type}To{to_camel_case(to_type)}32(value)
+            result = {to_type}(r)
+        }} else {{
+            var r {to_type}64
+            r, ok =  {full_from_type}To{to_camel_case(to_type)}64(value)
+            result = {to_type}(r)
+        }}
+        return''')
+    print('}')
+
+
+def generate_int_to_fixed_int(from_type, to_type, to_bits):
+    full_to_type = f'{to_type}{to_bits}'
+    print_function_header(from_type, full_to_type)
+    print(f'''\
+        if intBits == 32 {{
+            return {from_type}32To{to_camel_case(full_to_type)}({from_type}32(value))
+        }} else {{
+            return {from_type}64To{to_camel_case(full_to_type)}({from_type}64(value))
+        }}''')
+    print('}')
 
 
 def generate_float_convs():

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+"""Generate the generic 'To' function."""
 
 from safecast import ALL_INT_BITS, to_camel_case
 
 
 def generate_header():
+    """Generate file header."""
     print('package safecast\n')
     print("""
 type numericType interface {
@@ -49,7 +51,8 @@ def generate_to_type(to_type, to_bits):
     full_to_type = f'{to_type}{to_bits}'
     print(
         f'func to{to_camel_case(to_type)}{to_bits}[F numericType](value F) ({full_to_type}, bool) {{')
-    print(f'\tswitch f := any(value).(type) {{')
+    print('\tvar zero F // Use zero to any for type switch to avoid malloc')
+    print(f'\tswitch any(zero).(type) {{')
     for from_type in ('int', 'uint'):
         for from_bits in ALL_INT_BITS:
             full_from_type = f'{from_type}{from_bits}'
@@ -64,10 +67,10 @@ def generate_to_type(to_type, to_bits):
 
 def generate_call(full_from_type, full_to_type):
     if full_from_type == full_to_type:
-        print(f'\tcase {full_from_type}: return f, true')
+        print(f'\tcase {full_from_type}: return {full_to_type}(value), true')
     else:
         print(
-            f'\tcase {full_from_type}: return {full_from_type}To{to_camel_case(full_to_type)}(f)')
+            f'\tcase {full_from_type}: return {full_from_type}To{to_camel_case(full_to_type)}({full_from_type}(value))')
 
 
 def main():

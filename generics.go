@@ -12,9 +12,6 @@ type numericType interface {
 func To[ToType numericType, FromType numericType](value FromType) (result ToType, ok bool) {
 	ok = true
 	switch t := any(result).(type) {
-	case int:
-		t, ok = toInt(value)
-		result = ToType(t)
 	case int8:
 		t, ok = toInt8(value)
 		result = ToType(t)
@@ -27,8 +24,8 @@ func To[ToType numericType, FromType numericType](value FromType) (result ToType
 	case int64:
 		t, ok = toInt64(value)
 		result = ToType(t)
-	case uint:
-		t, ok = toUint(value)
+	case int:
+		t, ok = toInt(value)
 		result = ToType(t)
 	case uint8:
 		t, ok = toUint8(value)
@@ -42,6 +39,9 @@ func To[ToType numericType, FromType numericType](value FromType) (result ToType
 	case uint64:
 		t, ok = toUint64(value)
 		result = ToType(t)
+	case uint:
+		t, ok = toUint(value)
+		result = ToType(t)
 	case float32:
 		t, ok = toFloat32(value)
 		result = ToType(t)
@@ -52,362 +52,374 @@ func To[ToType numericType, FromType numericType](value FromType) (result ToType
 	return result, ok
 }
 
-func toInt[F numericType](value F) (int, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return f, true
-	case int8:
-		return int8ToInt(f)
-	case int16:
-		return int16ToInt(f)
-	case int32:
-		return int32ToInt(f)
-	case int64:
-		return int64ToInt(f)
-	case uint:
-		return uintToInt(f)
-	case uint8:
-		return uint8ToInt(f)
-	case uint16:
-		return uint16ToInt(f)
-	case uint32:
-		return uint32ToInt(f)
-	case uint64:
-		return uint64ToInt(f)
-	case float32:
-		return float32ToInt(f)
-	case float64:
-		return float64ToInt(f)
-	}
-	return int(value), false
-}
-
 func toInt8[F numericType](value F) (int8, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToInt8(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return f, true
+		return int8(value), true
 	case int16:
-		return int16ToInt8(f)
+		return int16ToInt8(int16(value))
 	case int32:
-		return int32ToInt8(f)
+		return int32ToInt8(int32(value))
 	case int64:
-		return int64ToInt8(f)
-	case uint:
-		return uintToInt8(f)
+		return int64ToInt8(int64(value))
+	case int:
+		return intToInt8(int(value))
 	case uint8:
-		return uint8ToInt8(f)
+		return uint8ToInt8(uint8(value))
 	case uint16:
-		return uint16ToInt8(f)
+		return uint16ToInt8(uint16(value))
 	case uint32:
-		return uint32ToInt8(f)
+		return uint32ToInt8(uint32(value))
 	case uint64:
-		return uint64ToInt8(f)
+		return uint64ToInt8(uint64(value))
+	case uint:
+		return uintToInt8(uint(value))
 	case float32:
-		return float32ToInt8(f)
+		return float32ToInt8(float32(value))
 	case float64:
-		return float64ToInt8(f)
+		return float64ToInt8(float64(value))
 	}
 	return int8(value), false
 }
 
 func toInt16[F numericType](value F) (int16, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToInt16(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToInt16(f)
+		return int8ToInt16(int8(value))
 	case int16:
-		return f, true
+		return int16(value), true
 	case int32:
-		return int32ToInt16(f)
+		return int32ToInt16(int32(value))
 	case int64:
-		return int64ToInt16(f)
-	case uint:
-		return uintToInt16(f)
+		return int64ToInt16(int64(value))
+	case int:
+		return intToInt16(int(value))
 	case uint8:
-		return uint8ToInt16(f)
+		return uint8ToInt16(uint8(value))
 	case uint16:
-		return uint16ToInt16(f)
+		return uint16ToInt16(uint16(value))
 	case uint32:
-		return uint32ToInt16(f)
+		return uint32ToInt16(uint32(value))
 	case uint64:
-		return uint64ToInt16(f)
+		return uint64ToInt16(uint64(value))
+	case uint:
+		return uintToInt16(uint(value))
 	case float32:
-		return float32ToInt16(f)
+		return float32ToInt16(float32(value))
 	case float64:
-		return float64ToInt16(f)
+		return float64ToInt16(float64(value))
 	}
 	return int16(value), false
 }
 
 func toInt32[F numericType](value F) (int32, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToInt32(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToInt32(f)
+		return int8ToInt32(int8(value))
 	case int16:
-		return int16ToInt32(f)
+		return int16ToInt32(int16(value))
 	case int32:
-		return f, true
+		return int32(value), true
 	case int64:
-		return int64ToInt32(f)
-	case uint:
-		return uintToInt32(f)
+		return int64ToInt32(int64(value))
+	case int:
+		return intToInt32(int(value))
 	case uint8:
-		return uint8ToInt32(f)
+		return uint8ToInt32(uint8(value))
 	case uint16:
-		return uint16ToInt32(f)
+		return uint16ToInt32(uint16(value))
 	case uint32:
-		return uint32ToInt32(f)
+		return uint32ToInt32(uint32(value))
 	case uint64:
-		return uint64ToInt32(f)
+		return uint64ToInt32(uint64(value))
+	case uint:
+		return uintToInt32(uint(value))
 	case float32:
-		return float32ToInt32(f)
+		return float32ToInt32(float32(value))
 	case float64:
-		return float64ToInt32(f)
+		return float64ToInt32(float64(value))
 	}
 	return int32(value), false
 }
 
 func toInt64[F numericType](value F) (int64, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToInt64(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToInt64(f)
+		return int8ToInt64(int8(value))
 	case int16:
-		return int16ToInt64(f)
+		return int16ToInt64(int16(value))
 	case int32:
-		return int32ToInt64(f)
+		return int32ToInt64(int32(value))
 	case int64:
-		return f, true
-	case uint:
-		return uintToInt64(f)
+		return int64(value), true
+	case int:
+		return intToInt64(int(value))
 	case uint8:
-		return uint8ToInt64(f)
+		return uint8ToInt64(uint8(value))
 	case uint16:
-		return uint16ToInt64(f)
+		return uint16ToInt64(uint16(value))
 	case uint32:
-		return uint32ToInt64(f)
+		return uint32ToInt64(uint32(value))
 	case uint64:
-		return uint64ToInt64(f)
+		return uint64ToInt64(uint64(value))
+	case uint:
+		return uintToInt64(uint(value))
 	case float32:
-		return float32ToInt64(f)
+		return float32ToInt64(float32(value))
 	case float64:
-		return float64ToInt64(f)
+		return float64ToInt64(float64(value))
 	}
 	return int64(value), false
 }
 
-func toUint[F numericType](value F) (uint, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToUint(f)
+func toInt[F numericType](value F) (int, bool) {
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToUint(f)
+		return int8ToInt(int8(value))
 	case int16:
-		return int16ToUint(f)
+		return int16ToInt(int16(value))
 	case int32:
-		return int32ToUint(f)
+		return int32ToInt(int32(value))
 	case int64:
-		return int64ToUint(f)
-	case uint:
-		return f, true
+		return int64ToInt(int64(value))
+	case int:
+		return int(value), true
 	case uint8:
-		return uint8ToUint(f)
+		return uint8ToInt(uint8(value))
 	case uint16:
-		return uint16ToUint(f)
+		return uint16ToInt(uint16(value))
 	case uint32:
-		return uint32ToUint(f)
+		return uint32ToInt(uint32(value))
 	case uint64:
-		return uint64ToUint(f)
+		return uint64ToInt(uint64(value))
+	case uint:
+		return uintToInt(uint(value))
 	case float32:
-		return float32ToUint(f)
+		return float32ToInt(float32(value))
 	case float64:
-		return float64ToUint(f)
+		return float64ToInt(float64(value))
 	}
-	return uint(value), false
+	return int(value), false
 }
 
 func toUint8[F numericType](value F) (uint8, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToUint8(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToUint8(f)
+		return int8ToUint8(int8(value))
 	case int16:
-		return int16ToUint8(f)
+		return int16ToUint8(int16(value))
 	case int32:
-		return int32ToUint8(f)
+		return int32ToUint8(int32(value))
 	case int64:
-		return int64ToUint8(f)
-	case uint:
-		return uintToUint8(f)
+		return int64ToUint8(int64(value))
+	case int:
+		return intToUint8(int(value))
 	case uint8:
-		return f, true
+		return uint8(value), true
 	case uint16:
-		return uint16ToUint8(f)
+		return uint16ToUint8(uint16(value))
 	case uint32:
-		return uint32ToUint8(f)
+		return uint32ToUint8(uint32(value))
 	case uint64:
-		return uint64ToUint8(f)
+		return uint64ToUint8(uint64(value))
+	case uint:
+		return uintToUint8(uint(value))
 	case float32:
-		return float32ToUint8(f)
+		return float32ToUint8(float32(value))
 	case float64:
-		return float64ToUint8(f)
+		return float64ToUint8(float64(value))
 	}
 	return uint8(value), false
 }
 
 func toUint16[F numericType](value F) (uint16, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToUint16(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToUint16(f)
+		return int8ToUint16(int8(value))
 	case int16:
-		return int16ToUint16(f)
+		return int16ToUint16(int16(value))
 	case int32:
-		return int32ToUint16(f)
+		return int32ToUint16(int32(value))
 	case int64:
-		return int64ToUint16(f)
-	case uint:
-		return uintToUint16(f)
+		return int64ToUint16(int64(value))
+	case int:
+		return intToUint16(int(value))
 	case uint8:
-		return uint8ToUint16(f)
+		return uint8ToUint16(uint8(value))
 	case uint16:
-		return f, true
+		return uint16(value), true
 	case uint32:
-		return uint32ToUint16(f)
+		return uint32ToUint16(uint32(value))
 	case uint64:
-		return uint64ToUint16(f)
+		return uint64ToUint16(uint64(value))
+	case uint:
+		return uintToUint16(uint(value))
 	case float32:
-		return float32ToUint16(f)
+		return float32ToUint16(float32(value))
 	case float64:
-		return float64ToUint16(f)
+		return float64ToUint16(float64(value))
 	}
 	return uint16(value), false
 }
 
 func toUint32[F numericType](value F) (uint32, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToUint32(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToUint32(f)
+		return int8ToUint32(int8(value))
 	case int16:
-		return int16ToUint32(f)
+		return int16ToUint32(int16(value))
 	case int32:
-		return int32ToUint32(f)
+		return int32ToUint32(int32(value))
 	case int64:
-		return int64ToUint32(f)
-	case uint:
-		return uintToUint32(f)
+		return int64ToUint32(int64(value))
+	case int:
+		return intToUint32(int(value))
 	case uint8:
-		return uint8ToUint32(f)
+		return uint8ToUint32(uint8(value))
 	case uint16:
-		return uint16ToUint32(f)
+		return uint16ToUint32(uint16(value))
 	case uint32:
-		return f, true
+		return uint32(value), true
 	case uint64:
-		return uint64ToUint32(f)
+		return uint64ToUint32(uint64(value))
+	case uint:
+		return uintToUint32(uint(value))
 	case float32:
-		return float32ToUint32(f)
+		return float32ToUint32(float32(value))
 	case float64:
-		return float64ToUint32(f)
+		return float64ToUint32(float64(value))
 	}
 	return uint32(value), false
 }
 
 func toUint64[F numericType](value F) (uint64, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToUint64(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToUint64(f)
+		return int8ToUint64(int8(value))
 	case int16:
-		return int16ToUint64(f)
+		return int16ToUint64(int16(value))
 	case int32:
-		return int32ToUint64(f)
+		return int32ToUint64(int32(value))
 	case int64:
-		return int64ToUint64(f)
-	case uint:
-		return uintToUint64(f)
+		return int64ToUint64(int64(value))
+	case int:
+		return intToUint64(int(value))
 	case uint8:
-		return uint8ToUint64(f)
+		return uint8ToUint64(uint8(value))
 	case uint16:
-		return uint16ToUint64(f)
+		return uint16ToUint64(uint16(value))
 	case uint32:
-		return uint32ToUint64(f)
+		return uint32ToUint64(uint32(value))
 	case uint64:
-		return f, true
+		return uint64(value), true
+	case uint:
+		return uintToUint64(uint(value))
 	case float32:
-		return float32ToUint64(f)
+		return float32ToUint64(float32(value))
 	case float64:
-		return float64ToUint64(f)
+		return float64ToUint64(float64(value))
 	}
 	return uint64(value), false
 }
 
-func toFloat32[F numericType](value F) (float32, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToFloat32(f)
+func toUint[F numericType](value F) (uint, bool) {
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToFloat32(f)
+		return int8ToUint(int8(value))
 	case int16:
-		return int16ToFloat32(f)
+		return int16ToUint(int16(value))
 	case int32:
-		return int32ToFloat32(f)
+		return int32ToUint(int32(value))
 	case int64:
-		return int64ToFloat32(f)
-	case uint:
-		return uintToFloat32(f)
+		return int64ToUint(int64(value))
+	case int:
+		return intToUint(int(value))
 	case uint8:
-		return uint8ToFloat32(f)
+		return uint8ToUint(uint8(value))
 	case uint16:
-		return uint16ToFloat32(f)
+		return uint16ToUint(uint16(value))
 	case uint32:
-		return uint32ToFloat32(f)
+		return uint32ToUint(uint32(value))
 	case uint64:
-		return uint64ToFloat32(f)
+		return uint64ToUint(uint64(value))
+	case uint:
+		return uint(value), true
 	case float32:
-		return f, true
+		return float32ToUint(float32(value))
 	case float64:
-		return float64ToFloat32(f)
+		return float64ToUint(float64(value))
+	}
+	return uint(value), false
+}
+
+func toFloat32[F numericType](value F) (float32, bool) {
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
+	case int8:
+		return int8ToFloat32(int8(value))
+	case int16:
+		return int16ToFloat32(int16(value))
+	case int32:
+		return int32ToFloat32(int32(value))
+	case int64:
+		return int64ToFloat32(int64(value))
+	case int:
+		return intToFloat32(int(value))
+	case uint8:
+		return uint8ToFloat32(uint8(value))
+	case uint16:
+		return uint16ToFloat32(uint16(value))
+	case uint32:
+		return uint32ToFloat32(uint32(value))
+	case uint64:
+		return uint64ToFloat32(uint64(value))
+	case uint:
+		return uintToFloat32(uint(value))
+	case float32:
+		return float32(value), true
+	case float64:
+		return float64ToFloat32(float64(value))
 	}
 	return float32(value), false
 }
 
 func toFloat64[F numericType](value F) (float64, bool) {
-	switch f := any(value).(type) {
-	case int:
-		return intToFloat64(f)
+	var zero F // Use zero to any for type switch to avoid malloc
+	switch any(zero).(type) {
 	case int8:
-		return int8ToFloat64(f)
+		return int8ToFloat64(int8(value))
 	case int16:
-		return int16ToFloat64(f)
+		return int16ToFloat64(int16(value))
 	case int32:
-		return int32ToFloat64(f)
+		return int32ToFloat64(int32(value))
 	case int64:
-		return int64ToFloat64(f)
-	case uint:
-		return uintToFloat64(f)
+		return int64ToFloat64(int64(value))
+	case int:
+		return intToFloat64(int(value))
 	case uint8:
-		return uint8ToFloat64(f)
+		return uint8ToFloat64(uint8(value))
 	case uint16:
-		return uint16ToFloat64(f)
+		return uint16ToFloat64(uint16(value))
 	case uint32:
-		return uint32ToFloat64(f)
+		return uint32ToFloat64(uint32(value))
 	case uint64:
-		return uint64ToFloat64(f)
+		return uint64ToFloat64(uint64(value))
+	case uint:
+		return uintToFloat64(uint(value))
 	case float32:
-		return float32ToFloat64(f)
+		return float32ToFloat64(float32(value))
 	case float64:
-		return f, true
+		return float64(value), true
 	}
 	return float64(value), false
 }
