@@ -26,42 +26,27 @@ func int8ToInt64(value int8) (result int64, ok bool) {
 
 // int8ToUint8 converts the int8 value to uint8 safely.
 func int8ToUint8(value int8) (result uint8, ok bool) {
-	if value < 0 {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), value >= 0
 }
 
 // int8ToUint16 converts the int8 value to uint16 safely.
 func int8ToUint16(value int8) (result uint16, ok bool) {
-	if value < 0 {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), value >= 0
 }
 
 // int8ToUint32 converts the int8 value to uint32 safely.
 func int8ToUint32(value int8) (result uint32, ok bool) {
-	if value < 0 {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), value >= 0
 }
 
 // int8ToUint64 converts the int8 value to uint64 safely.
 func int8ToUint64(value int8) (result uint64, ok bool) {
-	if value < 0 {
-		return uint64(value), false
-	}
-	return uint64(value), true
+	return uint64(value), value >= 0
 }
 
 // int16ToInt8 converts the int16 value to int8 safely.
 func int16ToInt8(value int16) (result int8, ok bool) {
-	if int16(int8(value)) != value {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), int16(int8(value)) == value
 }
 
 // int16ToInt16 converts the int16 value to int16 safely.
@@ -81,53 +66,32 @@ func int16ToInt64(value int16) (result int64, ok bool) {
 
 // int16ToUint8 converts the int16 value to uint8 safely.
 func int16ToUint8(value int16) (result uint8, ok bool) {
-	if value < 0 {
-		return uint8(value), false
-	}
-	if int16(uint8(value)) != value {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), value >= 0 && int16(uint8(value)) == value
 }
 
 // int16ToUint16 converts the int16 value to uint16 safely.
 func int16ToUint16(value int16) (result uint16, ok bool) {
-	if value < 0 {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), value >= 0
 }
 
 // int16ToUint32 converts the int16 value to uint32 safely.
 func int16ToUint32(value int16) (result uint32, ok bool) {
-	if value < 0 {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), value >= 0
 }
 
 // int16ToUint64 converts the int16 value to uint64 safely.
 func int16ToUint64(value int16) (result uint64, ok bool) {
-	if value < 0 {
-		return uint64(value), false
-	}
-	return uint64(value), true
+	return uint64(value), value >= 0
 }
 
 // int32ToInt8 converts the int32 value to int8 safely.
 func int32ToInt8(value int32) (result int8, ok bool) {
-	if int32(int8(value)) != value {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), int32(int8(value)) == value
 }
 
 // int32ToInt16 converts the int32 value to int16 safely.
 func int32ToInt16(value int32) (result int16, ok bool) {
-	if int32(int16(value)) != value {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), int32(int16(value)) == value
 }
 
 // int32ToInt32 converts the int32 value to int32 safely.
@@ -142,64 +106,37 @@ func int32ToInt64(value int32) (result int64, ok bool) {
 
 // int32ToUint8 converts the int32 value to uint8 safely.
 func int32ToUint8(value int32) (result uint8, ok bool) {
-	if value < 0 {
-		return uint8(value), false
-	}
-	if int32(uint8(value)) != value {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), value >= 0 && int32(uint8(value)) == value
 }
 
 // int32ToUint16 converts the int32 value to uint16 safely.
 func int32ToUint16(value int32) (result uint16, ok bool) {
-	if value < 0 {
-		return uint16(value), false
-	}
-	if int32(uint16(value)) != value {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), value >= 0 && int32(uint16(value)) == value
 }
 
 // int32ToUint32 converts the int32 value to uint32 safely.
 func int32ToUint32(value int32) (result uint32, ok bool) {
-	if value < 0 {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), value >= 0
 }
 
 // int32ToUint64 converts the int32 value to uint64 safely.
 func int32ToUint64(value int32) (result uint64, ok bool) {
-	if value < 0 {
-		return uint64(value), false
-	}
-	return uint64(value), true
+	return uint64(value), value >= 0
 }
 
 // int64ToInt8 converts the int64 value to int8 safely.
 func int64ToInt8(value int64) (result int8, ok bool) {
-	if int64(int8(value)) != value {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), int64(int8(value)) == value
 }
 
 // int64ToInt16 converts the int64 value to int16 safely.
 func int64ToInt16(value int64) (result int16, ok bool) {
-	if int64(int16(value)) != value {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), int64(int16(value)) == value
 }
 
 // int64ToInt32 converts the int64 value to int32 safely.
 func int64ToInt32(value int64) (result int32, ok bool) {
-	if int64(int32(value)) != value {
-		return int32(value), false
-	}
-	return int32(value), true
+	return int32(value), int64(int32(value)) == value
 }
 
 // int64ToInt64 converts the int64 value to int64 safely.
@@ -209,51 +146,27 @@ func int64ToInt64(value int64) (result int64, ok bool) {
 
 // int64ToUint8 converts the int64 value to uint8 safely.
 func int64ToUint8(value int64) (result uint8, ok bool) {
-	if value < 0 {
-		return uint8(value), false
-	}
-	if int64(uint8(value)) != value {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), value >= 0 && int64(uint8(value)) == value
 }
 
 // int64ToUint16 converts the int64 value to uint16 safely.
 func int64ToUint16(value int64) (result uint16, ok bool) {
-	if value < 0 {
-		return uint16(value), false
-	}
-	if int64(uint16(value)) != value {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), value >= 0 && int64(uint16(value)) == value
 }
 
 // int64ToUint32 converts the int64 value to uint32 safely.
 func int64ToUint32(value int64) (result uint32, ok bool) {
-	if value < 0 {
-		return uint32(value), false
-	}
-	if int64(uint32(value)) != value {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), value >= 0 && int64(uint32(value)) == value
 }
 
 // int64ToUint64 converts the int64 value to uint64 safely.
 func int64ToUint64(value int64) (result uint64, ok bool) {
-	if value < 0 {
-		return uint64(value), false
-	}
-	return uint64(value), true
+	return uint64(value), value >= 0
 }
 
 // uint8ToInt8 converts the uint8 value to int8 safely.
 func uint8ToInt8(value uint8) (result int8, ok bool) {
-	if value > math.MaxInt8 {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), value <= math.MaxInt8
 }
 
 // uint8ToInt16 converts the uint8 value to int16 safely.
@@ -293,18 +206,12 @@ func uint8ToUint64(value uint8) (result uint64, ok bool) {
 
 // uint16ToInt8 converts the uint16 value to int8 safely.
 func uint16ToInt8(value uint16) (result int8, ok bool) {
-	if uint16(int8(value)) != value {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), uint16(int8(value)) == value
 }
 
 // uint16ToInt16 converts the uint16 value to int16 safely.
 func uint16ToInt16(value uint16) (result int16, ok bool) {
-	if value > math.MaxInt16 {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), value <= math.MaxInt16
 }
 
 // uint16ToInt32 converts the uint16 value to int32 safely.
@@ -319,10 +226,7 @@ func uint16ToInt64(value uint16) (result int64, ok bool) {
 
 // uint16ToUint8 converts the uint16 value to uint8 safely.
 func uint16ToUint8(value uint16) (result uint8, ok bool) {
-	if uint16(uint8(value)) != value {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), uint16(uint8(value)) == value
 }
 
 // uint16ToUint16 converts the uint16 value to uint16 safely.
@@ -342,26 +246,17 @@ func uint16ToUint64(value uint16) (result uint64, ok bool) {
 
 // uint32ToInt8 converts the uint32 value to int8 safely.
 func uint32ToInt8(value uint32) (result int8, ok bool) {
-	if uint32(int8(value)) != value {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), uint32(int8(value)) == value
 }
 
 // uint32ToInt16 converts the uint32 value to int16 safely.
 func uint32ToInt16(value uint32) (result int16, ok bool) {
-	if uint32(int16(value)) != value {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), uint32(int16(value)) == value
 }
 
 // uint32ToInt32 converts the uint32 value to int32 safely.
 func uint32ToInt32(value uint32) (result int32, ok bool) {
-	if value > math.MaxInt32 {
-		return int32(value), false
-	}
-	return int32(value), true
+	return int32(value), value <= math.MaxInt32
 }
 
 // uint32ToInt64 converts the uint32 value to int64 safely.
@@ -371,18 +266,12 @@ func uint32ToInt64(value uint32) (result int64, ok bool) {
 
 // uint32ToUint8 converts the uint32 value to uint8 safely.
 func uint32ToUint8(value uint32) (result uint8, ok bool) {
-	if uint32(uint8(value)) != value {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), uint32(uint8(value)) == value
 }
 
 // uint32ToUint16 converts the uint32 value to uint16 safely.
 func uint32ToUint16(value uint32) (result uint16, ok bool) {
-	if uint32(uint16(value)) != value {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), uint32(uint16(value)) == value
 }
 
 // uint32ToUint32 converts the uint32 value to uint32 safely.
@@ -397,58 +286,37 @@ func uint32ToUint64(value uint32) (result uint64, ok bool) {
 
 // uint64ToInt8 converts the uint64 value to int8 safely.
 func uint64ToInt8(value uint64) (result int8, ok bool) {
-	if uint64(int8(value)) != value {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), uint64(int8(value)) == value
 }
 
 // uint64ToInt16 converts the uint64 value to int16 safely.
 func uint64ToInt16(value uint64) (result int16, ok bool) {
-	if uint64(int16(value)) != value {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), uint64(int16(value)) == value
 }
 
 // uint64ToInt32 converts the uint64 value to int32 safely.
 func uint64ToInt32(value uint64) (result int32, ok bool) {
-	if uint64(int32(value)) != value {
-		return int32(value), false
-	}
-	return int32(value), true
+	return int32(value), uint64(int32(value)) == value
 }
 
 // uint64ToInt64 converts the uint64 value to int64 safely.
 func uint64ToInt64(value uint64) (result int64, ok bool) {
-	if value > math.MaxInt64 {
-		return int64(value), false
-	}
-	return int64(value), true
+	return int64(value), value <= math.MaxInt64
 }
 
 // uint64ToUint8 converts the uint64 value to uint8 safely.
 func uint64ToUint8(value uint64) (result uint8, ok bool) {
-	if uint64(uint8(value)) != value {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), uint64(uint8(value)) == value
 }
 
 // uint64ToUint16 converts the uint64 value to uint16 safely.
 func uint64ToUint16(value uint64) (result uint16, ok bool) {
-	if uint64(uint16(value)) != value {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), uint64(uint16(value)) == value
 }
 
 // uint64ToUint32 converts the uint64 value to uint32 safely.
 func uint64ToUint32(value uint64) (result uint32, ok bool) {
-	if uint64(uint32(value)) != value {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), uint64(uint32(value)) == value
 }
 
 // uint64ToUint64 converts the uint64 value to uint64 safely.
@@ -836,10 +704,7 @@ func uintToInt(value uint) (result int, ok bool) {
 
 // float32ToInt8 converts the float32 value to int8 safely.
 func float32ToInt8(value float32) (result int8, ok bool) {
-	if value < float32(math.MinInt8) || value > float32(math.MaxInt8) {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), value >= math.MinInt8 && value <= math.MaxInt8
 }
 
 func int8ToFloat32(value int8) (float32, bool) {
@@ -848,10 +713,7 @@ func int8ToFloat32(value int8) (float32, bool) {
 
 // float32ToInt16 converts the float32 value to int16 safely.
 func float32ToInt16(value float32) (result int16, ok bool) {
-	if value < float32(math.MinInt16) || value > float32(math.MaxInt16) {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), value >= math.MinInt16 && value <= math.MaxInt16
 }
 
 func int16ToFloat32(value int16) (float32, bool) {
@@ -860,10 +722,7 @@ func int16ToFloat32(value int16) (float32, bool) {
 
 // float32ToInt32 converts the float32 value to int32 safely.
 func float32ToInt32(value float32) (result int32, ok bool) {
-	if value < float32(math.MinInt32) || value > float32(math.MaxInt32) {
-		return int32(value), false
-	}
-	return int32(value), true
+	return int32(value), value >= math.MinInt32 && value <= math.MaxInt32
 }
 
 func int32ToFloat32(value int32) (float32, bool) {
@@ -872,10 +731,7 @@ func int32ToFloat32(value int32) (float32, bool) {
 
 // float32ToInt64 converts the float32 value to int64 safely.
 func float32ToInt64(value float32) (result int64, ok bool) {
-	if value < float32(math.MinInt64) || value > float32(math.MaxInt64) {
-		return int64(value), false
-	}
-	return int64(value), true
+	return int64(value), value >= math.MinInt64 && value <= math.MaxInt64
 }
 
 func int64ToFloat32(value int64) (float32, bool) {
@@ -884,10 +740,7 @@ func int64ToFloat32(value int64) (float32, bool) {
 
 // float32ToInt converts the float32 value to int safely.
 func float32ToInt(value float32) (result int, ok bool) {
-	if value < float32(math.MinInt) || value > float32(math.MaxInt) {
-		return int(value), false
-	}
-	return int(value), true
+	return int(value), value >= math.MinInt && value <= math.MaxInt
 }
 
 func intToFloat32(value int) (float32, bool) {
@@ -896,10 +749,7 @@ func intToFloat32(value int) (float32, bool) {
 
 // float32ToUint8 converts the float32 value to uint8 safely.
 func float32ToUint8(value float32) (result uint8, ok bool) {
-	if value < 0 || value > float32(math.MaxUint8) {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), value >= 0 && value <= math.MaxUint8
 }
 
 func uint8ToFloat32(value uint8) (float32, bool) {
@@ -908,10 +758,7 @@ func uint8ToFloat32(value uint8) (float32, bool) {
 
 // float32ToUint16 converts the float32 value to uint16 safely.
 func float32ToUint16(value float32) (result uint16, ok bool) {
-	if value < 0 || value > float32(math.MaxUint16) {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), value >= 0 && value <= math.MaxUint16
 }
 
 func uint16ToFloat32(value uint16) (float32, bool) {
@@ -920,10 +767,7 @@ func uint16ToFloat32(value uint16) (float32, bool) {
 
 // float32ToUint32 converts the float32 value to uint32 safely.
 func float32ToUint32(value float32) (result uint32, ok bool) {
-	if value < 0 || value > float32(math.MaxUint32) {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), value >= 0 && value <= math.MaxUint32
 }
 
 func uint32ToFloat32(value uint32) (float32, bool) {
@@ -932,10 +776,7 @@ func uint32ToFloat32(value uint32) (float32, bool) {
 
 // float32ToUint64 converts the float32 value to uint64 safely.
 func float32ToUint64(value float32) (result uint64, ok bool) {
-	if value < 0 || value > float32(math.MaxUint64) {
-		return uint64(value), false
-	}
-	return uint64(value), true
+	return uint64(value), value >= 0 && value <= math.MaxUint64
 }
 
 func uint64ToFloat32(value uint64) (float32, bool) {
@@ -944,10 +785,7 @@ func uint64ToFloat32(value uint64) (float32, bool) {
 
 // float32ToUint converts the float32 value to uint safely.
 func float32ToUint(value float32) (result uint, ok bool) {
-	if value < 0 || value > float32(math.MaxUint) {
-		return uint(value), false
-	}
-	return uint(value), true
+	return uint(value), value >= 0 && value <= math.MaxUint
 }
 
 func uintToFloat32(value uint) (float32, bool) {
@@ -956,10 +794,7 @@ func uintToFloat32(value uint) (float32, bool) {
 
 // float64ToInt8 converts the float64 value to int8 safely.
 func float64ToInt8(value float64) (result int8, ok bool) {
-	if value < float64(math.MinInt8) || value > float64(math.MaxInt8) {
-		return int8(value), false
-	}
-	return int8(value), true
+	return int8(value), value >= math.MinInt8 && value <= math.MaxInt8
 }
 
 func int8ToFloat64(value int8) (float64, bool) {
@@ -968,10 +803,7 @@ func int8ToFloat64(value int8) (float64, bool) {
 
 // float64ToInt16 converts the float64 value to int16 safely.
 func float64ToInt16(value float64) (result int16, ok bool) {
-	if value < float64(math.MinInt16) || value > float64(math.MaxInt16) {
-		return int16(value), false
-	}
-	return int16(value), true
+	return int16(value), value >= math.MinInt16 && value <= math.MaxInt16
 }
 
 func int16ToFloat64(value int16) (float64, bool) {
@@ -980,10 +812,7 @@ func int16ToFloat64(value int16) (float64, bool) {
 
 // float64ToInt32 converts the float64 value to int32 safely.
 func float64ToInt32(value float64) (result int32, ok bool) {
-	if value < float64(math.MinInt32) || value > float64(math.MaxInt32) {
-		return int32(value), false
-	}
-	return int32(value), true
+	return int32(value), value >= math.MinInt32 && value <= math.MaxInt32
 }
 
 func int32ToFloat64(value int32) (float64, bool) {
@@ -992,10 +821,7 @@ func int32ToFloat64(value int32) (float64, bool) {
 
 // float64ToInt64 converts the float64 value to int64 safely.
 func float64ToInt64(value float64) (result int64, ok bool) {
-	if value < float64(math.MinInt64) || value > float64(math.MaxInt64) {
-		return int64(value), false
-	}
-	return int64(value), true
+	return int64(value), value >= math.MinInt64 && value <= math.MaxInt64
 }
 
 func int64ToFloat64(value int64) (float64, bool) {
@@ -1004,10 +830,7 @@ func int64ToFloat64(value int64) (float64, bool) {
 
 // float64ToInt converts the float64 value to int safely.
 func float64ToInt(value float64) (result int, ok bool) {
-	if value < float64(math.MinInt) || value > float64(math.MaxInt) {
-		return int(value), false
-	}
-	return int(value), true
+	return int(value), value >= math.MinInt && value <= math.MaxInt
 }
 
 func intToFloat64(value int) (float64, bool) {
@@ -1016,10 +839,7 @@ func intToFloat64(value int) (float64, bool) {
 
 // float64ToUint8 converts the float64 value to uint8 safely.
 func float64ToUint8(value float64) (result uint8, ok bool) {
-	if value < 0 || value > float64(math.MaxUint8) {
-		return uint8(value), false
-	}
-	return uint8(value), true
+	return uint8(value), value >= 0 && value <= math.MaxUint8
 }
 
 func uint8ToFloat64(value uint8) (float64, bool) {
@@ -1028,10 +848,7 @@ func uint8ToFloat64(value uint8) (float64, bool) {
 
 // float64ToUint16 converts the float64 value to uint16 safely.
 func float64ToUint16(value float64) (result uint16, ok bool) {
-	if value < 0 || value > float64(math.MaxUint16) {
-		return uint16(value), false
-	}
-	return uint16(value), true
+	return uint16(value), value >= 0 && value <= math.MaxUint16
 }
 
 func uint16ToFloat64(value uint16) (float64, bool) {
@@ -1040,10 +857,7 @@ func uint16ToFloat64(value uint16) (float64, bool) {
 
 // float64ToUint32 converts the float64 value to uint32 safely.
 func float64ToUint32(value float64) (result uint32, ok bool) {
-	if value < 0 || value > float64(math.MaxUint32) {
-		return uint32(value), false
-	}
-	return uint32(value), true
+	return uint32(value), value >= 0 && value <= math.MaxUint32
 }
 
 func uint32ToFloat64(value uint32) (float64, bool) {
@@ -1052,10 +866,7 @@ func uint32ToFloat64(value uint32) (float64, bool) {
 
 // float64ToUint64 converts the float64 value to uint64 safely.
 func float64ToUint64(value float64) (result uint64, ok bool) {
-	if value < 0 || value > float64(math.MaxUint64) {
-		return uint64(value), false
-	}
-	return uint64(value), true
+	return uint64(value), value >= 0 && value <= math.MaxUint64
 }
 
 func uint64ToFloat64(value uint64) (float64, bool) {
@@ -1064,10 +875,7 @@ func uint64ToFloat64(value uint64) (float64, bool) {
 
 // float64ToUint converts the float64 value to uint safely.
 func float64ToUint(value float64) (result uint, ok bool) {
-	if value < 0 || value > float64(math.MaxUint) {
-		return uint(value), false
-	}
-	return uint(value), true
+	return uint(value), value >= 0 && value <= math.MaxUint
 }
 
 func uintToFloat64(value uint) (float64, bool) {
@@ -1079,8 +887,5 @@ func float32ToFloat64(value float32) (float64, bool) {
 }
 
 func float64ToFloat32(value float64) (float32, bool) {
-	if value > math.MaxFloat32 || value < -math.MaxFloat32 {
-		return float32(value), false
-	}
-	return float32(value), true
+	return float32(value), value >= -math.MaxFloat32 && value <= math.MaxFloat32
 }

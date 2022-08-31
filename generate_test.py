@@ -17,13 +17,15 @@ import (
 
 func expectFalse(t * testing.T, value bool) {
     if value {
-        t.Fail()
+	    t.Helper()
+        t.Errorf("Expect false, got true")
     }
 }
 
 func expectTrue(t * testing.T, value bool) {
     if !value {
-        t.Fail()
+        t.Helper()
+        t.Errorf("Expect true, got false")
     }
 }
 ''')

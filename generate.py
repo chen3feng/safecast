@@ -13,83 +13,39 @@ def generate_fixed_int(from_type, from_bits, to_type, to_bits):
     full_from_type = f'{from_type}{from_bits}'
     full_to_type = f'{to_type}{to_bits}'
 
-    def print_false_return(cond):
-        print(f'\tif {cond} {{\n\t\treturn {full_to_type}(value), false\n\t}}')
-
-    overflow = f'{full_from_type}({full_to_type}(value)) != value'
+    no_overflow = f'{full_from_type}({full_to_type}(value)) == value'
 
     def same_signedness():
-        if from_bits and to_bits:  # intnn to intxx
-            if int(from_bits) <= int(to_bits):
-                return
-            print_false_return(overflow)
-        elif from_bits:  # u?intnn to u?int
-            if int(from_bits) <= 32:  # int is at least 32 bits
-                return
-            print_false_return(f'math.MaxInt == math.MaxInt32 && {overflow}')
-        elif to_bits:  # u?int to u?intnn
-            if int(to_bits) > 32:  # int64 >= int, ok
-                return
-            # int to intnn
-            cond = ('math.MaxInt == math.MaxInt64 && ' if int(
-                to_bits) == 32 else '') + overflow
-            print_false_return(cond)
+        if int(from_bits) <= int(to_bits):
+            return
+        return no_overflow
 
     def uint_to_int():
-        if from_bits and to_bits:  # uintnn to intxx
-            if int(from_bits) < int(to_bits):
-                return
-            if int(from_bits) > int(to_bits):
-                print_false_return(overflow)
-            else:
-                cond = f'value > math.Max{to_camel_case(full_to_type)}'
-                print_false_return(cond)
-        elif from_bits:  # uintnn to int
-            if int(from_bits) < 32:
-                return
-            print_false_return('value > math.MaxInt')
-        elif to_bits:  # uint_to_intnn
-            if int(to_bits) > 32:
-                return
-            print_false_return(f'value > math.MaxInt{to_bits}')
-        else:  # uint to int
-            print_false_return('value > math.MaxInt')
+        if int(from_bits) < int(to_bits):
+            return
+        if int(from_bits) > int(to_bits):
+            return no_overflow
+        else:
+            return f'value <= math.Max{to_camel_case(full_to_type)}'
 
     def int_to_uint():
-        print_false_return('value < 0')
+        cond = 'value >= 0'
         if from_bits and to_bits:  # intnn to uintxx
             if int(from_bits) <= int(to_bits):
-                return
-            print_false_return(overflow)
-        elif from_bits:  # intnn to uint
-            if int(from_bits) <= 32:
-                return
-            #  int32/64 to uint
-            print_false_return(
-                'math.MaxInt == math.MaxInt32 && value > math.MaxUint32')
-        elif to_bits:  # int to uintnn
-            if int(to_bits) > 32:
-                return
-            print_false_return(f'value > math.MaxUint{to_bits}')
-        else:  # int to uint
-            # Always OK
-            pass
+                return cond
+            return f'{cond} && {no_overflow}'
 
-    def generate_range_chack():
+    def range_chack():
         if from_type == to_type:
-            same_signedness()
+            return same_signedness()
         elif from_type == 'uint':
-            uint_to_int()
+            return uint_to_int()
         else:  # int to uint
-            int_to_uint()
+            return int_to_uint()
 
     print_function_header(full_from_type, full_to_type)
-    generate_range_chack()
-    print_function_footer(full_to_type)
-
-
-def print_range_check(cond, full_to_type):
-    print(f'\tif {cond} {{\n\t\treturn {full_to_type}(value), false\n\t}}')
+    ok = range_chack()
+    print_function_footer(full_to_type, ok)
 
 
 def print_function_header(full_from_type, full_to_type):
@@ -98,8 +54,10 @@ def print_function_header(full_from_type, full_to_type):
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
 
 
-def print_function_footer(full_to_type):
-    print(f'\treturn {full_to_type}(value), true')
+def print_function_footer(full_to_type, ok):
+    if not ok:
+        ok = 'true'
+    print(f'\treturn {full_to_type}(value), {ok}')
     print('}\n')
 
 
@@ -171,10 +129,7 @@ def generate_float_convs():
     }
 
     func float64ToFloat32(value float64) (float32, bool) {
-        if value > math.MaxFloat32 || value < -math.MaxFloat32 {
-            return float32(value), false
-        }
-        return float32(value), true
+        return float32(value), value >= -math.MaxFloat32 && value <= math.MaxFloat32
     }
     """)
 
@@ -183,20 +138,17 @@ def generate_float_to_conv(from_bits, to_type, to_bits):
     full_from_type = f'float{from_bits}'
     full_to_type = f'{to_type}{to_bits}'
 
-    def print_false_return(cond):
-        print(f'\tif {cond} {{\n\t\treturn {full_to_type}(value), false\n\t}}')
-
-    def generate_range_chack():
-        min = f'{full_from_type}(math.Min{to_camel_case(full_to_type)})' if to_type == 'int' else '0'
-        cond = f'value < {min}'
-        cond += f' || value > {full_from_type}(math.Max{to_camel_case(full_to_type)})'
-        print_false_return(cond)
+    def range_chack():
+        min = f'math.Min{to_camel_case(full_to_type)}' if to_type == 'int' else '0'
+        cond = f'value >= {min}'
+        cond += f' && value <= math.Max{to_camel_case(full_to_type)}'
+        return cond
 
     func_name = f'float{from_bits}To{to_camel_case(to_type)}{to_bits}'
     print(f'// {func_name} converts the {full_from_type} value to {full_to_type} safely.')
     print(f'func {func_name}(value {full_from_type}) (result {full_to_type}, ok bool) {{')
-    generate_range_chack()
-    print(f'\treturn {full_to_type}(value), true')
+    ok = range_chack() or 'true'
+    print(f'\treturn {full_to_type}(value), {ok}')
     print('}\n')
 
 
