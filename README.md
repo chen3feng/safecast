@@ -9,6 +9,7 @@ English | [简体中文](README_zh.md)
 ![Build Status](https://github.com/chen3feng/safecast/actions/workflows/go.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/chen3feng/safecast/badge.svg?branch=master)](https://coveralls.io/github/chen3feng/safecast?branch=master)
 [![GoReport](https://goreportcard.com/badge/github.com/securego/gosec)](https://goreportcard.com/report/github.com/chen3feng/safecast)
+[![Go Reference](https://pkg.go.dev/badge/github.com/chen3feng/safecast.svg)](https://pkg.go.dev/github.com/chen3feng/safecast)
 
 Safe numeric type cast library. suppoer all integral and floating types, except uintptr.
 
@@ -20,7 +21,7 @@ Usage:
 val, ok := To[type](value)
 ```
 
-`ok == false` indicates overflow occured. but whatever，`val` is always equals to the result of the type cast (`type(value)`) expression。
+`ok == false` indicates overflow occured. but whatever，`val` is always equals to the result of the normal type cast (`type(value)`) expression。
 
 <!-- gomarkdoc:embed:start -->
 

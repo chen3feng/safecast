@@ -7,6 +7,7 @@
 ![Build Status](https://github.com/chen3feng/safecast/actions/workflows/go.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/chen3feng/safecast/badge.svg?branch=master)](https://coveralls.io/github/chen3feng/safecast?branch=master)
 [![GoReport](https://goreportcard.com/badge/github.com/securego/gosec)](https://goreportcard.com/report/github.com/chen3feng/safecast)
+[![Go Reference](https://pkg.go.dev/badge/github.com/chen3feng/safecast.svg)](https://pkg.go.dev/github.com/chen3feng/safecast)
 
 安全的数值类型转换库。支持除了 `uintptr` 外的所有整数和浮点数类型。
 
@@ -16,7 +17,7 @@
 val, ok := To[type](value)
 ```
 
-`ok == false` 表示值溢出，无论成功失败，`val` 都等效于直接用类型转换（`type(value)`）的结果。
+`ok == false` 表示值溢出。但是无论成功失败，`val` 都等效于直接用普通类型转换（`type(value)`）的结果。
 
 <!-- gomarkdoc:embed:start -->
 
