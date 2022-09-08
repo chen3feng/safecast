@@ -23,7 +23,7 @@ val, ok := To[type](value)
 
 `ok == false` indicates overflow occured. but whatever，`val` is always equals to the result of the normal type cast (`type(value)`) expression。
 
-There is also non-parametric forms of the target types:
+There are also non-parametric forms of the target types:
 
 ````go
 val, ok := ToInt32(value)
