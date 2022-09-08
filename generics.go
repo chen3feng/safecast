@@ -13,46 +13,46 @@ func To[ToType numericType, FromType numericType](value FromType) (result ToType
 	ok = true
 	switch t := any(result).(type) {
 	case int8:
-		t, ok = toInt8(value)
+		t, ok = ToInt8(value)
 		result = ToType(t)
 	case int16:
-		t, ok = toInt16(value)
+		t, ok = ToInt16(value)
 		result = ToType(t)
 	case int32:
-		t, ok = toInt32(value)
+		t, ok = ToInt32(value)
 		result = ToType(t)
 	case int64:
-		t, ok = toInt64(value)
+		t, ok = ToInt64(value)
 		result = ToType(t)
 	case int:
-		t, ok = toInt(value)
+		t, ok = ToInt(value)
 		result = ToType(t)
 	case uint8:
-		t, ok = toUint8(value)
+		t, ok = ToUint8(value)
 		result = ToType(t)
 	case uint16:
-		t, ok = toUint16(value)
+		t, ok = ToUint16(value)
 		result = ToType(t)
 	case uint32:
-		t, ok = toUint32(value)
+		t, ok = ToUint32(value)
 		result = ToType(t)
 	case uint64:
-		t, ok = toUint64(value)
+		t, ok = ToUint64(value)
 		result = ToType(t)
 	case uint:
-		t, ok = toUint(value)
+		t, ok = ToUint(value)
 		result = ToType(t)
 	case float32:
-		t, ok = toFloat32(value)
+		t, ok = ToFloat32(value)
 		result = ToType(t)
 	case float64:
-		t, ok = toFloat64(value)
+		t, ok = ToFloat64(value)
 		result = ToType(t)
 	}
 	return result, ok
 }
 
-func toInt8[F numericType](value F) (int8, bool) {
+func ToInt8[F numericType](value F) (int8, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -83,7 +83,7 @@ func toInt8[F numericType](value F) (int8, bool) {
 	return int8(value), false
 }
 
-func toInt16[F numericType](value F) (int16, bool) {
+func ToInt16[F numericType](value F) (int16, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -114,7 +114,7 @@ func toInt16[F numericType](value F) (int16, bool) {
 	return int16(value), false
 }
 
-func toInt32[F numericType](value F) (int32, bool) {
+func ToInt32[F numericType](value F) (int32, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -145,7 +145,7 @@ func toInt32[F numericType](value F) (int32, bool) {
 	return int32(value), false
 }
 
-func toInt64[F numericType](value F) (int64, bool) {
+func ToInt64[F numericType](value F) (int64, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -176,7 +176,7 @@ func toInt64[F numericType](value F) (int64, bool) {
 	return int64(value), false
 }
 
-func toInt[F numericType](value F) (int, bool) {
+func ToInt[F numericType](value F) (int, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -207,7 +207,7 @@ func toInt[F numericType](value F) (int, bool) {
 	return int(value), false
 }
 
-func toUint8[F numericType](value F) (uint8, bool) {
+func ToUint8[F numericType](value F) (uint8, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -238,7 +238,7 @@ func toUint8[F numericType](value F) (uint8, bool) {
 	return uint8(value), false
 }
 
-func toUint16[F numericType](value F) (uint16, bool) {
+func ToUint16[F numericType](value F) (uint16, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -269,7 +269,7 @@ func toUint16[F numericType](value F) (uint16, bool) {
 	return uint16(value), false
 }
 
-func toUint32[F numericType](value F) (uint32, bool) {
+func ToUint32[F numericType](value F) (uint32, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -300,7 +300,7 @@ func toUint32[F numericType](value F) (uint32, bool) {
 	return uint32(value), false
 }
 
-func toUint64[F numericType](value F) (uint64, bool) {
+func ToUint64[F numericType](value F) (uint64, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -331,7 +331,7 @@ func toUint64[F numericType](value F) (uint64, bool) {
 	return uint64(value), false
 }
 
-func toUint[F numericType](value F) (uint, bool) {
+func ToUint[F numericType](value F) (uint, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -362,7 +362,7 @@ func toUint[F numericType](value F) (uint, bool) {
 	return uint(value), false
 }
 
-func toFloat32[F numericType](value F) (float32, bool) {
+func ToFloat32[F numericType](value F) (float32, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
@@ -393,7 +393,7 @@ func toFloat32[F numericType](value F) (float32, bool) {
 	return float32(value), false
 }
 
-func toFloat64[F numericType](value F) (float64, bool) {
+func ToFloat64[F numericType](value F) (float64, bool) {
 	var zero F // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
