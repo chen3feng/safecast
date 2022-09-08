@@ -49,8 +49,13 @@ func To[ToType numericType, FromType numericType](value FromType)(result ToType,
 
 def generate_to_type(to_type, to_bits):
     full_to_type = f'{to_type}{to_bits}'
+    funcname = f'To{to_camel_case(to_type)}{to_bits}'
+    print(f'// {funcname} converts value to {full_to_type} type safely.\n'
+          f'// result will always be same as the usual type cast({full_to_type}(value)),\n'
+          f'// but ok is false when overflow or underflow occured.'
+          )
     print(
-        f'func To{to_camel_case(to_type)}{to_bits}[F numericType](value F) ({full_to_type}, bool) {{')
+        f'func {funcname}[F numericType](value F) ({full_to_type}, bool) {{')
     print('\tvar zero F // Use zero to any for type switch to avoid malloc')
     print(f'\tswitch any(zero).(type) {{')
     for from_type in ('int', 'uint'):

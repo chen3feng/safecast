@@ -199,77 +199,101 @@ func main() {
 </p>
 </details>
 
-## func [ToFloat32](<https://github.com/chen3feng/safecast/blob/master/generics.go#L365>)
+## func [ToFloat32](<https://github.com/chen3feng/safecast/blob/master/generics.go#L398>)
 
 ```go
 func ToFloat32[F numericType](value F) (float32, bool)
 ```
 
-## func [ToFloat64](<https://github.com/chen3feng/safecast/blob/master/generics.go#L396>)
+ToFloat32 converts value to float32 type safely. result will always be same as the usual type cast\(float32\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToFloat64](<https://github.com/chen3feng/safecast/blob/master/generics.go#L432>)
 
 ```go
 func ToFloat64[F numericType](value F) (float64, bool)
 ```
 
-## func [ToInt](<https://github.com/chen3feng/safecast/blob/master/generics.go#L179>)
+ToFloat64 converts value to float64 type safely. result will always be same as the usual type cast\(float64\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToInt](<https://github.com/chen3feng/safecast/blob/master/generics.go#L194>)
 
 ```go
 func ToInt[F numericType](value F) (int, bool)
 ```
 
-## func [ToInt16](<https://github.com/chen3feng/safecast/blob/master/generics.go#L86>)
+ToInt converts value to int type safely. result will always be same as the usual type cast\(int\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToInt16](<https://github.com/chen3feng/safecast/blob/master/generics.go#L92>)
 
 ```go
 func ToInt16[F numericType](value F) (int16, bool)
 ```
 
-## func [ToInt32](<https://github.com/chen3feng/safecast/blob/master/generics.go#L117>)
+ToInt16 converts value to int16 type safely. result will always be same as the usual type cast\(int16\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToInt32](<https://github.com/chen3feng/safecast/blob/master/generics.go#L126>)
 
 ```go
 func ToInt32[F numericType](value F) (int32, bool)
 ```
 
-## func [ToInt64](<https://github.com/chen3feng/safecast/blob/master/generics.go#L148>)
+ToInt32 converts value to int32 type safely. result will always be same as the usual type cast\(int32\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToInt64](<https://github.com/chen3feng/safecast/blob/master/generics.go#L160>)
 
 ```go
 func ToInt64[F numericType](value F) (int64, bool)
 ```
 
-## func [ToInt8](<https://github.com/chen3feng/safecast/blob/master/generics.go#L55>)
+ToInt64 converts value to int64 type safely. result will always be same as the usual type cast\(int64\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToInt8](<https://github.com/chen3feng/safecast/blob/master/generics.go#L58>)
 
 ```go
 func ToInt8[F numericType](value F) (int8, bool)
 ```
 
-## func [ToUint](<https://github.com/chen3feng/safecast/blob/master/generics.go#L334>)
+ToInt8 converts value to int8 type safely. result will always be same as the usual type cast\(int8\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToUint](<https://github.com/chen3feng/safecast/blob/master/generics.go#L364>)
 
 ```go
 func ToUint[F numericType](value F) (uint, bool)
 ```
 
-## func [ToUint16](<https://github.com/chen3feng/safecast/blob/master/generics.go#L241>)
+ToUint converts value to uint type safely. result will always be same as the usual type cast\(uint\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToUint16](<https://github.com/chen3feng/safecast/blob/master/generics.go#L262>)
 
 ```go
 func ToUint16[F numericType](value F) (uint16, bool)
 ```
 
-## func [ToUint32](<https://github.com/chen3feng/safecast/blob/master/generics.go#L272>)
+ToUint16 converts value to uint16 type safely. result will always be same as the usual type cast\(uint16\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToUint32](<https://github.com/chen3feng/safecast/blob/master/generics.go#L296>)
 
 ```go
 func ToUint32[F numericType](value F) (uint32, bool)
 ```
 
-## func [ToUint64](<https://github.com/chen3feng/safecast/blob/master/generics.go#L303>)
+ToUint32 converts value to uint32 type safely. result will always be same as the usual type cast\(uint32\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToUint64](<https://github.com/chen3feng/safecast/blob/master/generics.go#L330>)
 
 ```go
 func ToUint64[F numericType](value F) (uint64, bool)
 ```
 
-## func [ToUint8](<https://github.com/chen3feng/safecast/blob/master/generics.go#L210>)
+ToUint64 converts value to uint64 type safely. result will always be same as the usual type cast\(uint64\(value\)\), but ok is false when overflow or underflow occured.
+
+## func [ToUint8](<https://github.com/chen3feng/safecast/blob/master/generics.go#L228>)
 
 ```go
 func ToUint8[F numericType](value F) (uint8, bool)
 ```
+
+ToUint8 converts value to uint8 type safely. result will always be same as the usual type cast\(uint8\(value\)\), but ok is false when overflow or underflow occured.
 
 
 
