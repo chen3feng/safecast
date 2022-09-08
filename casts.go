@@ -330,11 +330,10 @@ func int8ToInt(value int8) (result int, ok bool) {
 		var r int32
 		r, ok = int8ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = int8ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = int8ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -344,11 +343,10 @@ func int8ToUint(value int8) (result uint, ok bool) {
 		var r uint32
 		r, ok = int8ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = int8ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = int8ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -358,11 +356,10 @@ func int16ToInt(value int16) (result int, ok bool) {
 		var r int32
 		r, ok = int16ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = int16ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = int16ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -372,11 +369,10 @@ func int16ToUint(value int16) (result uint, ok bool) {
 		var r uint32
 		r, ok = int16ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = int16ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = int16ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -386,11 +382,10 @@ func int32ToInt(value int32) (result int, ok bool) {
 		var r int32
 		r, ok = int32ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = int32ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = int32ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -400,11 +395,10 @@ func int32ToUint(value int32) (result uint, ok bool) {
 		var r uint32
 		r, ok = int32ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = int32ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = int32ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -414,11 +408,10 @@ func int64ToInt(value int64) (result int, ok bool) {
 		var r int32
 		r, ok = int64ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = int64ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = int64ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -428,11 +421,10 @@ func int64ToUint(value int64) (result uint, ok bool) {
 		var r uint32
 		r, ok = int64ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = int64ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = int64ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -442,11 +434,10 @@ func uint8ToInt(value uint8) (result int, ok bool) {
 		var r int32
 		r, ok = uint8ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = uint8ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = uint8ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -456,11 +447,10 @@ func uint8ToUint(value uint8) (result uint, ok bool) {
 		var r uint32
 		r, ok = uint8ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = uint8ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = uint8ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -470,11 +460,10 @@ func uint16ToInt(value uint16) (result int, ok bool) {
 		var r int32
 		r, ok = uint16ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = uint16ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = uint16ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -484,11 +473,10 @@ func uint16ToUint(value uint16) (result uint, ok bool) {
 		var r uint32
 		r, ok = uint16ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = uint16ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = uint16ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -498,11 +486,10 @@ func uint32ToInt(value uint32) (result int, ok bool) {
 		var r int32
 		r, ok = uint32ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = uint32ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = uint32ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -512,11 +499,10 @@ func uint32ToUint(value uint32) (result uint, ok bool) {
 		var r uint32
 		r, ok = uint32ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = uint32ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = uint32ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -526,11 +512,10 @@ func uint64ToInt(value uint64) (result int, ok bool) {
 		var r int32
 		r, ok = uint64ToInt32(value)
 		result = int(r)
-	} else {
-		var r int64
-		r, ok = uint64ToInt64(value)
-		result = int(r)
 	}
+	var r int64
+	r, ok = uint64ToInt64(value)
+	result = int(r)
 	return
 }
 
@@ -540,11 +525,10 @@ func uint64ToUint(value uint64) (result uint, ok bool) {
 		var r uint32
 		r, ok = uint64ToUint32(value)
 		result = uint(r)
-	} else {
-		var r uint64
-		r, ok = uint64ToUint64(value)
-		result = uint(r)
 	}
+	var r uint64
+	r, ok = uint64ToUint64(value)
+	result = uint(r)
 	return
 }
 
@@ -552,144 +536,128 @@ func uint64ToUint(value uint64) (result uint, ok bool) {
 func intToInt8(value int) (result int8, ok bool) {
 	if intBits == 32 {
 		return int32ToInt8(int32(value))
-	} else {
-		return int64ToInt8(int64(value))
 	}
+	return int64ToInt8(int64(value))
 }
 
 // intToInt16 converts the int value to int16 safely.
 func intToInt16(value int) (result int16, ok bool) {
 	if intBits == 32 {
 		return int32ToInt16(int32(value))
-	} else {
-		return int64ToInt16(int64(value))
 	}
+	return int64ToInt16(int64(value))
 }
 
 // intToInt32 converts the int value to int32 safely.
 func intToInt32(value int) (result int32, ok bool) {
 	if intBits == 32 {
 		return int32ToInt32(int32(value))
-	} else {
-		return int64ToInt32(int64(value))
 	}
+	return int64ToInt32(int64(value))
 }
 
 // intToInt64 converts the int value to int64 safely.
 func intToInt64(value int) (result int64, ok bool) {
 	if intBits == 32 {
 		return int32ToInt64(int32(value))
-	} else {
-		return int64ToInt64(int64(value))
 	}
+	return int64ToInt64(int64(value))
 }
 
 // intToUint8 converts the int value to uint8 safely.
 func intToUint8(value int) (result uint8, ok bool) {
 	if intBits == 32 {
 		return int32ToUint8(int32(value))
-	} else {
-		return int64ToUint8(int64(value))
 	}
+	return int64ToUint8(int64(value))
 }
 
 // intToUint16 converts the int value to uint16 safely.
 func intToUint16(value int) (result uint16, ok bool) {
 	if intBits == 32 {
 		return int32ToUint16(int32(value))
-	} else {
-		return int64ToUint16(int64(value))
 	}
+	return int64ToUint16(int64(value))
 }
 
 // intToUint32 converts the int value to uint32 safely.
 func intToUint32(value int) (result uint32, ok bool) {
 	if intBits == 32 {
 		return int32ToUint32(int32(value))
-	} else {
-		return int64ToUint32(int64(value))
 	}
+	return int64ToUint32(int64(value))
 }
 
 // intToUint64 converts the int value to uint64 safely.
 func intToUint64(value int) (result uint64, ok bool) {
 	if intBits == 32 {
 		return int32ToUint64(int32(value))
-	} else {
-		return int64ToUint64(int64(value))
 	}
+	return int64ToUint64(int64(value))
 }
 
 // uintToInt8 converts the uint value to int8 safely.
 func uintToInt8(value uint) (result int8, ok bool) {
 	if intBits == 32 {
 		return uint32ToInt8(uint32(value))
-	} else {
-		return uint64ToInt8(uint64(value))
 	}
+	return uint64ToInt8(uint64(value))
 }
 
 // uintToInt16 converts the uint value to int16 safely.
 func uintToInt16(value uint) (result int16, ok bool) {
 	if intBits == 32 {
 		return uint32ToInt16(uint32(value))
-	} else {
-		return uint64ToInt16(uint64(value))
 	}
+	return uint64ToInt16(uint64(value))
 }
 
 // uintToInt32 converts the uint value to int32 safely.
 func uintToInt32(value uint) (result int32, ok bool) {
 	if intBits == 32 {
 		return uint32ToInt32(uint32(value))
-	} else {
-		return uint64ToInt32(uint64(value))
 	}
+	return uint64ToInt32(uint64(value))
 }
 
 // uintToInt64 converts the uint value to int64 safely.
 func uintToInt64(value uint) (result int64, ok bool) {
 	if intBits == 32 {
 		return uint32ToInt64(uint32(value))
-	} else {
-		return uint64ToInt64(uint64(value))
 	}
+	return uint64ToInt64(uint64(value))
 }
 
 // uintToUint8 converts the uint value to uint8 safely.
 func uintToUint8(value uint) (result uint8, ok bool) {
 	if intBits == 32 {
 		return uint32ToUint8(uint32(value))
-	} else {
-		return uint64ToUint8(uint64(value))
 	}
+	return uint64ToUint8(uint64(value))
 }
 
 // uintToUint16 converts the uint value to uint16 safely.
 func uintToUint16(value uint) (result uint16, ok bool) {
 	if intBits == 32 {
 		return uint32ToUint16(uint32(value))
-	} else {
-		return uint64ToUint16(uint64(value))
 	}
+	return uint64ToUint16(uint64(value))
 }
 
 // uintToUint32 converts the uint value to uint32 safely.
 func uintToUint32(value uint) (result uint32, ok bool) {
 	if intBits == 32 {
 		return uint32ToUint32(uint32(value))
-	} else {
-		return uint64ToUint32(uint64(value))
 	}
+	return uint64ToUint32(uint64(value))
 }
 
 // uintToUint64 converts the uint value to uint64 safely.
 func uintToUint64(value uint) (result uint64, ok bool) {
 	if intBits == 32 {
 		return uint32ToUint64(uint32(value))
-	} else {
-		return uint64ToUint64(uint64(value))
 	}
+	return uint64ToUint64(uint64(value))
 }
 
 // intToUint converts the int value to uint safely.

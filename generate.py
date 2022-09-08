@@ -94,11 +94,10 @@ def generate_fixed_int_to_int(from_type, from_bits, to_type):
             var r {to_type}32
             r, ok = {full_from_type}To{to_camel_case(to_type)}32(value)
             result = {to_type}(r)
-        }} else {{
-            var r {to_type}64
-            r, ok =  {full_from_type}To{to_camel_case(to_type)}64(value)
-            result = {to_type}(r)
         }}
+        var r {to_type}64
+        r, ok =  {full_from_type}To{to_camel_case(to_type)}64(value)
+        result = {to_type}(r)
         return''')
     print('}')
 
@@ -109,9 +108,8 @@ def generate_int_to_fixed_int(from_type, to_type, to_bits):
     print(f'''\
         if intBits == 32 {{
             return {from_type}32To{to_camel_case(full_to_type)}({from_type}32(value))
-        }} else {{
-            return {from_type}64To{to_camel_case(full_to_type)}({from_type}64(value))
-        }}''')
+        }}
+        return {from_type}64To{to_camel_case(full_to_type)}({from_type}64(value))''')
     print('}')
 
 
