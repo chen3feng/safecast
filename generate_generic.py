@@ -55,8 +55,8 @@ def generate_to_type(to_type, to_bits):
           f'// but ok is false when overflow or underflow occured.'
           )
     print(
-        f'func {funcname}[F numericType](value F) ({full_to_type}, bool) {{')
-    print('\tvar zero F // Use zero to any for type switch to avoid malloc')
+        f'func {funcname}[FromType numericType](value FromType) ({full_to_type}, bool) {{')
+    print('\tvar zero FromType // Use zero to any for type switch to avoid malloc')
     print(f'\tswitch any(zero).(type) {{')
     for from_type in ('int', 'uint'):
         for from_bits in ALL_INT_BITS:

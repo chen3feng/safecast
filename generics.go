@@ -55,8 +55,8 @@ func To[ToType numericType, FromType numericType](value FromType) (result ToType
 // ToInt8 converts value to int8 type safely.
 // result will always be same as the usual type cast(int8(value)),
 // but ok is false when overflow or underflow occured.
-func ToInt8[F numericType](value F) (int8, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToInt8[FromType numericType](value FromType) (int8, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8(value), true
@@ -89,8 +89,8 @@ func ToInt8[F numericType](value F) (int8, bool) {
 // ToInt16 converts value to int16 type safely.
 // result will always be same as the usual type cast(int16(value)),
 // but ok is false when overflow or underflow occured.
-func ToInt16[F numericType](value F) (int16, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToInt16[FromType numericType](value FromType) (int16, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToInt16(int8(value))
@@ -123,8 +123,8 @@ func ToInt16[F numericType](value F) (int16, bool) {
 // ToInt32 converts value to int32 type safely.
 // result will always be same as the usual type cast(int32(value)),
 // but ok is false when overflow or underflow occured.
-func ToInt32[F numericType](value F) (int32, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToInt32[FromType numericType](value FromType) (int32, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToInt32(int8(value))
@@ -157,8 +157,8 @@ func ToInt32[F numericType](value F) (int32, bool) {
 // ToInt64 converts value to int64 type safely.
 // result will always be same as the usual type cast(int64(value)),
 // but ok is false when overflow or underflow occured.
-func ToInt64[F numericType](value F) (int64, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToInt64[FromType numericType](value FromType) (int64, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToInt64(int8(value))
@@ -191,8 +191,8 @@ func ToInt64[F numericType](value F) (int64, bool) {
 // ToInt converts value to int type safely.
 // result will always be same as the usual type cast(int(value)),
 // but ok is false when overflow or underflow occured.
-func ToInt[F numericType](value F) (int, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToInt[FromType numericType](value FromType) (int, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToInt(int8(value))
@@ -225,8 +225,8 @@ func ToInt[F numericType](value F) (int, bool) {
 // ToUint8 converts value to uint8 type safely.
 // result will always be same as the usual type cast(uint8(value)),
 // but ok is false when overflow or underflow occured.
-func ToUint8[F numericType](value F) (uint8, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToUint8[FromType numericType](value FromType) (uint8, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToUint8(int8(value))
@@ -259,8 +259,8 @@ func ToUint8[F numericType](value F) (uint8, bool) {
 // ToUint16 converts value to uint16 type safely.
 // result will always be same as the usual type cast(uint16(value)),
 // but ok is false when overflow or underflow occured.
-func ToUint16[F numericType](value F) (uint16, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToUint16[FromType numericType](value FromType) (uint16, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToUint16(int8(value))
@@ -293,8 +293,8 @@ func ToUint16[F numericType](value F) (uint16, bool) {
 // ToUint32 converts value to uint32 type safely.
 // result will always be same as the usual type cast(uint32(value)),
 // but ok is false when overflow or underflow occured.
-func ToUint32[F numericType](value F) (uint32, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToUint32[FromType numericType](value FromType) (uint32, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToUint32(int8(value))
@@ -327,8 +327,8 @@ func ToUint32[F numericType](value F) (uint32, bool) {
 // ToUint64 converts value to uint64 type safely.
 // result will always be same as the usual type cast(uint64(value)),
 // but ok is false when overflow or underflow occured.
-func ToUint64[F numericType](value F) (uint64, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToUint64[FromType numericType](value FromType) (uint64, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToUint64(int8(value))
@@ -361,8 +361,8 @@ func ToUint64[F numericType](value F) (uint64, bool) {
 // ToUint converts value to uint type safely.
 // result will always be same as the usual type cast(uint(value)),
 // but ok is false when overflow or underflow occured.
-func ToUint[F numericType](value F) (uint, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToUint[FromType numericType](value FromType) (uint, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToUint(int8(value))
@@ -395,8 +395,8 @@ func ToUint[F numericType](value F) (uint, bool) {
 // ToFloat32 converts value to float32 type safely.
 // result will always be same as the usual type cast(float32(value)),
 // but ok is false when overflow or underflow occured.
-func ToFloat32[F numericType](value F) (float32, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToFloat32[FromType numericType](value FromType) (float32, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToFloat32(int8(value))
@@ -429,8 +429,8 @@ func ToFloat32[F numericType](value F) (float32, bool) {
 // ToFloat64 converts value to float64 type safely.
 // result will always be same as the usual type cast(float64(value)),
 // but ok is false when overflow or underflow occured.
-func ToFloat64[F numericType](value F) (float64, bool) {
-	var zero F // Use zero to any for type switch to avoid malloc
+func ToFloat64[FromType numericType](value FromType) (float64, bool) {
+	var zero FromType // Use zero to any for type switch to avoid malloc
 	switch any(zero).(type) {
 	case int8:
 		return int8ToFloat64(int8(value))
